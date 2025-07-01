@@ -1,0 +1,99 @@
+
+ <div class="d-flex align-items-center justify-content-center vh-100">
+<div class="card p-4 p-md-5 shadow-lg" style="border-radius: 1rem; border: none;">
+
+  <div class="text-center mb-4">
+    <h2 class="card-title fw-bold">Crear una Cuenta</h2>
+    <p class="text-muted">Completa tus datos</p>
+  </div>
+
+  <!-- Mensaje de éxito -->
+  <div *ngIf="registroExitoso" class="alert alert-success">
+    ¡Usuario registrado con éxito! Redirigiendo al login...
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" *ngIf="!registroExitoso" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Nombre -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" formControlName="nombre">
+          <label for="nombre">Nombre completo</label>
+          <div *ngIf="registerForm.get('nombre')?.touched && registerForm.get('nombre')?.hasError('required')" class="invalid-feedback d-block">
+            Este campo es obligatorio.
+          </div>
+        </div>
+
+        <!-- Usuario -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario" formControlName="usuario">
+          <label for="usuario">Nombre de usuario</label>
+          <div *ngIf="registerForm.get('usuario')?.touched && registerForm.get('usuario')?.hasError('required')" class="invalid-feedback d-block">
+            Ingresa un nombre de usuario válido.
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="email" placeholder="Correo electrónico" formControlName="email">
+          <label for="email">Correo electrónico</label>
+          <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors as errors" class="invalid-feedback d-block">
+            <span *ngIf="errors['required']">Correo electrónico inválido.</span>
+            <span *ngIf="errors['email']">El formato no es válido.</span>
+            <span *ngIf="errors['emailExists']">Este correo ya está en uso.</span>
+          </div>
+           <div *ngIf="registerForm.get('email')?.pending" class="text-muted small mt-1">Verificando...</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <!-- Fecha Nacimiento -->
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+          <label for="fechaNacimiento">Fecha de nacimiento</label>
+           <div *ngIf="registerForm.get('fechaNacimiento')?.touched && registerForm.get('fechaNacimiento')?.hasError('required')" class="invalid-feedback d-block">
+            La fecha es requerida.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="password" placeholder="Contraseña" formControlName="password">
+          <label for="password">Contraseña</label>
+          <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors as errors" class="invalid-feedback d-block">
+             <span *ngIf="errors['required']">La contraseña es requerida.</span>
+             <span *ngIf="errors['pattern']">Mínimo 8 caracteres, 1 número y 1 mayúscula.</span>
+          </div>
+        </div>
+
+        <!-- Confirmar Password -->
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="confirmarPassword" placeholder="Confirmar contraseña" formControlName="confirmarPassword">
+          <label for="confirmarPassword">Confirmar contraseña</label>
+          <div *ngIf="registerForm.get('confirmarPassword')?.touched && (registerForm.hasError('passwordMismatch') || registerForm.get('confirmarPassword')?.hasError('required'))" class="invalid-feedback d-block">
+            <span *ngIf="registerForm.get('confirmarPassword')?.hasError('required')">Confirma tu contraseña.</span>
+            <span *ngIf="registerForm.hasError('passwordMismatch') && !registerForm.get('confirmarPassword')?.hasError('required')">Las contraseñas no coinciden.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="form-floating mb-4">
+      <textarea class="form-control" id="comentarios" placeholder="Comentarios" style="height: 80px" formControlName="comentarios"></textarea>
+      <label for="comentarios">Comentarios (opcional)</label>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="registerForm.invalid || registerForm.pending">Enviar Registro</button>
+      <button type="reset" class="btn btn-outline-secondary">Limpiar Campos</button>
+    </div>
+  </form>
+
+  <div class="text-center mt-4" *ngIf="!registroExitoso">
+    <p class="mb-0">¿Ya tienes una cuenta? <a routerLink="/auth/login" class="fw-medium">Iniciar Sesión</a></p>
+  </div>
+</div>
+
+
+</div>

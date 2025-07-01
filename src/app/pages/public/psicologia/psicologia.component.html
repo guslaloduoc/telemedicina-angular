@@ -1,0 +1,28 @@
+<main class="container my-5">
+    
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold">Psicología en Línea</h1>
+    <p class="lead text-muted">Cuida tu salud mental con nuestros psicólogos certificados. Ofrecemos un espacio seguro y confidencial para tu bienestar.</p>
+  </div>
+
+  <!-- Contenedor para mensajes de feedback -->
+  <div *ngIf="mensaje" class="alert mb-4" [ngClass]="{'alert-success': mensaje.tipo === 'exito', 'alert-danger': mensaje.tipo === 'error'}">
+    {{ mensaje.texto }}
+  </div>
+
+  <section class="row">
+
+    <!-- Usamos *ngFor para iterar sobre la lista de psicólogos -->
+    <div *ngFor="let psicologo of psicologos" class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100 shadow-sm border-0 text-center">
+        <img [src]="psicologo.imagen" class="card-img-top" [alt]="psicologo.nombre">
+        <div class="card-body d-flex flex-column">
+          <h2 class="card-title h5 fw-bold">{{ psicologo.nombre }}</h2>
+          <p class="card-text text-muted">{{ psicologo.descripcion }}</p>
+          <button class="btn btn-primary mt-auto" (click)="agendarHora(psicologo.servicio)">Agendar Hora</button>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+</main>

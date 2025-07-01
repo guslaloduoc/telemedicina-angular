@@ -1,0 +1,81 @@
+<main class="container my-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-light border-0 py-3">
+      <h1 class="h3 mb-0 fw-bold">Panel de Administración</h1>
+      <p class="mb-0 text-muted">Gestión de todos los usuarios registrados en el sistema.</p>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th scope="col" class="d-none d-lg-table-cell">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col" class="d-none d-lg-table-cell">Usuario</th>
+              <th scope="col" class="d-none d-md-table-cell">Email</th>
+              <th scope="col" class="d-none d-lg-table-cell">Fecha Nacimiento</th>
+              <th scope="col" class="d-none d-md-table-cell">Tipo</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <!-- Angular llenará esta sección con *ngFor -->
+          <tbody *ngIf="users$ | async as users">
+            <tr *ngFor="let user of users; let i = index">
+              <td class="d-none d-lg-table-cell">{{ i + 1 }}</td>
+              <td>{{ user.nombre }}</td>
+              <td class="d-none d-lg-table-cell">{{ user.usuario || '-' }}</td>
+              <td class="d-none d-md-table-cell">{{ user.email }}</td>
+              <td class="d-none d-lg-table-cell">{{ user.fechaNacimiento || '-' }}</td>
+              <td class="d-none d-md-table-cell">
+                <span class="badge" [ngClass]="user.tipo === 'admin' ? 'bg-success' : 'bg-secondary'">{{ user.tipo }}</span>
+              </td>
+              <td>
+                <button class="btn btn-warning btn-sm me-2" (click)="openEditModal(user)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteUser(user)" [disabled]="user.email === currentUserEmail">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Modal de Edición (lo mantenemos porque es mejor UX que los prompts) -->
+<div class="modal fade" id="editUserModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+          <div class="mb-3">
+            <label for="edit-nombre" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="edit-nombre" formControlName="nombre">
+          </div>
+          <div class="mb-3">
+            <label for="edit-usuario" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" id="edit-usuario" formControlName="usuario">
+          </div>
+          <div class="mb-3">
+            <label for="edit-email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="edit-email" formControlName="email">
+          </div>
+          <div class="mb-3">
+            <label for="edit-tipo" class="form-label">Tipo de Usuario</label>
+            <select id="edit-tipo" class="form-select" formControlName="tipo">
+              <option value="usuario">Usuario</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

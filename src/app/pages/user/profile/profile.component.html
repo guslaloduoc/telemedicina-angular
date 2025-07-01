@@ -1,0 +1,55 @@
+<div class="container my-5" *ngIf="user$ | async as user; else cargando">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body text-center">
+          <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" alt="Foto de Perfil" class="rounded-circle mb-3" width="150">
+          <h3 class="card-title mb-1">{{ user.nombre }}</h3>
+          <p class="card-text text-muted">{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h2 class="card-title mb-4">Detalles de Mi Perfil</h2>
+
+          <div *ngIf="mensajeExito" class="alert alert-success">
+            {{ mensajeExito }}
+          </div>
+
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" formControlName="nombre">
+              <label for="nombre">Nombre completo</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario" formControlName="usuario">
+              <label for="usuario">Nombre de usuario</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="email" placeholder="Correo electrónico" formControlName="email">
+              <label for="email">Correo electrónico (no editable)</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+              <label for="fechaNacimiento">Fecha de nacimiento</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg mt-3" [disabled]="profileForm.invalid">
+              Guardar cambios
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #cargando>
+  <p class="text-center">Cargando perfil...</p>
+</ng-template>

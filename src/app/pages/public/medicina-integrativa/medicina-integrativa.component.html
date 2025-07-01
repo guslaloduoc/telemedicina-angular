@@ -1,0 +1,28 @@
+<main class="container my-5">
+    
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold">Medicina Integrativa</h1>
+    <p class="lead text-muted">Un enfoque que une lo mejor de la medicina convencional y las terapias alternativas para un cuidado completo de tu salud.</p>
+  </div>
+
+  <!-- Contenedor para mensajes de feedback -->
+  <div *ngIf="mensaje" class="alert mb-4" [ngClass]="{'alert-success': mensaje.tipo === 'exito', 'alert-danger': mensaje.tipo === 'error'}">
+    {{ mensaje.texto }}
+  </div>
+
+  <section class="row">
+
+    <!-- Usamos *ngFor para iterar sobre la lista de especialistas -->
+    <div *ngFor="let especialista of especialistas" class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100 shadow-sm border-0 text-center">
+        <img [src]="especialista.imagen" class="card-img-top" [alt]="especialista.nombre">
+        <div class="card-body d-flex flex-column">
+          <h2 class="card-title h5 fw-bold">{{ especialista.nombre }}</h2>
+          <p class="card-text text-muted">{{ especialista.descripcion }}</p>
+          <button class="btn btn-primary mt-auto" (click)="agendarHora(especialista.servicio)">Agendar Hora</button>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+</main>
