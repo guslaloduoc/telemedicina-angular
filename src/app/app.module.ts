@@ -15,8 +15,14 @@ import { AuthService } from './core/services/auth.service';
 import { AuthLayoutComponent } from './features/layouts/auth-layout/auth-layout.component';
 
 
-// --- NUEVO: Función Factory para el APP_INITIALIZER ---
-// Esta función se ejecutará al inicio. Devuelve una función que devuelve una Promesa.
+/**
+ * @description
+ * Función de tipo factory que se ejecuta durante la inicialización de la aplicación.
+ * Se utiliza para asegurar que ciertas tareas, como la creación de un usuario administrador
+ * por defecto, se completen antes de que la aplicación sea completamente funcional.
+ * @param authService El servicio de autenticación necesario para realizar la tarea de inicialización.
+ * @returns Una función que devuelve una `Promise`.
+ */
 export function appInitializer(authService: AuthService) {
   return () => new Promise(resolve => {
     authService.asegurarAdminPorDefecto();
@@ -24,9 +30,18 @@ export function appInitializer(authService: AuthService) {
   });
 }
 
-
+/**
+ * @description
+ * Módulo raíz de la aplicación Angular.
+ * Es el punto de entrada principal que organiza y ensambla todas las partes de la aplicación.
+ */
 @NgModule({
-   providers: [
+  /**
+   * @description
+   * Proveedores de servicios para la inyección de dependencias.
+   * Aquí se registra el `APP_INITIALIZER` para ejecutar código al arranque.
+   */
+  providers: [
     { 
       provide: APP_INITIALIZER, 
       useFactory: appInitializer, 
@@ -34,10 +49,19 @@ export function appInitializer(authService: AuthService) {
       multi: true 
     }
   ],
+  /**
+   * @description
+   * El conjunto de componentes, directivas y pipes que pertenecen a este módulo.
+   */
   declarations: [
     AppComponent,
     HomeComponent
   ],
+  /**
+   * @description
+   * La lista de otros módulos cuyas clases exportadas son necesarias para las plantillas
+   * de los componentes declarados en este módulo.
+   */
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,6 +69,11 @@ export function appInitializer(authService: AuthService) {
     MedicinaGeneralComponent,
     PsicologiaComponent
   ],
+  /**
+   * @description
+   * El componente principal que Angular crea e inserta en el `index.html`
+   * como el componente raíz de la aplicación.
+   */
   bootstrap: [AppComponent]
 })
 export class AppModule { }

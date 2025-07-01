@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que gestiona la página de &quot;Mi Perfil&quot;.
+Muestra los datos del usuario logueado y le permite actualizar su información.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -253,12 +261,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:38</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente. Inyecta los servicios necesarios para su funcionamiento.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -267,6 +277,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -281,6 +292,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>El servicio para obtener y actualizar los datos del perfil.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>fb</td>
@@ -293,6 +308,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>El servicio FormBuilder para crear el formulario reactivo.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -332,19 +351,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/pages/user/profile/profile.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/pages/user/profile/profile.component.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Método del ciclo de vida de Angular que se ejecuta al inicializar el componente.
+Se encarga de crear el formulario y de cargar los datos del usuario en él.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -369,19 +395,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/pages/user/profile/profile.component.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/pages/user/profile/profile.component.ts:82</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Método que se ejecuta cuando el usuario envía el formulario de edición.
+Valida el formulario y, si es válido, llama al servicio para guardar los cambios.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -416,10 +449,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena un mensaje de éxito para mostrar al usuario después de actualizar el perfil.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -442,10 +481,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:32</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>El FormGroup que define la estructura y validaciones del formulario de edición del perfil.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -468,10 +513,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/user/profile/profile.component.ts:26</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Un Observable que emite los datos del perfil del usuario actual.
+La plantilla se suscribe a este observable para mostrar la información dinámicamente.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -488,6 +540,11 @@ import { Observable, of } from &#x27;rxjs&#x27;;
 import { User } from &#x27;../../../core/services/auth.service&#x27;;
 import { UserService } from &#x27;../../../core/services/user.service&#x27;;
 
+/**
+ * @description
+ * Componente que gestiona la página de &quot;Mi Perfil&quot;.
+ * Muestra los datos del usuario logueado y le permite actualizar su información.
+ */
 @Component({
   selector: &#x27;app-profile&#x27;,
   standalone: true,
@@ -496,10 +553,31 @@ import { UserService } from &#x27;../../../core/services/user.service&#x27;;
   styleUrls: [&#x27;./profile.component.scss&#x27;]
 })
 export class ProfileComponent implements OnInit {
+  /**
+   * @description
+   * Un Observable que emite los datos del perfil del usuario actual.
+   * La plantilla se suscribe a este observable para mostrar la información dinámicamente.
+   */
   user$: Observable&lt;User | null&gt;;
+
+  /**
+   * @description
+   * El FormGroup que define la estructura y validaciones del formulario de edición del perfil.
+   */
   profileForm!: FormGroup;
+
+  /**
+   * @description
+   * Almacena un mensaje de éxito para mostrar al usuario después de actualizar el perfil.
+   */
   mensajeExito: string | null &#x3D; null;
 
+  /**
+   * @description
+   * Constructor del componente. Inyecta los servicios necesarios para su funcionamiento.
+   * @param userService El servicio para obtener y actualizar los datos del perfil.
+   * @param fb El servicio FormBuilder para crear el formulario reactivo.
+   */
   constructor(
     private userService: UserService,
     private fb: FormBuilder
@@ -507,6 +585,12 @@ export class ProfileComponent implements OnInit {
     this.user$ &#x3D; this.userService.getCurrentUserProfile();
   }
 
+  /**
+   * @description
+   * Método del ciclo de vida de Angular que se ejecuta al inicializar el componente.
+   * Se encarga de crear el formulario y de cargar los datos del usuario en él.
+   * @returns void
+   */
   ngOnInit(): void {
     // Inicializamos el formulario
     this.profileForm &#x3D; this.fb.group({
@@ -524,6 +608,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * @description
+   * Método que se ejecuta cuando el usuario envía el formulario de edición.
+   * Valida el formulario y, si es válido, llama al servicio para guardar los cambios.
+   * @returns void
+   */
   onSubmit(): void {
     if (this.profileForm.invalid) {
       return;

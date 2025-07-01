@@ -158,17 +158,20 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(route, state) &#x3D;&gt; {
+  // Se inyectan los servicios necesarios usando la función inject().
   const authService &#x3D; inject(AuthService);
   const router &#x3D; inject(Router);
 
+  // Se obtiene el valor de la sesión actual desde el AuthService.
   const currentUser &#x3D; authService.currentUserValue;
 
+  // Se comprueba si existe una sesión y si el tipo de usuario es &#x27;admin&#x27;.
   if (currentUser &amp;&amp; currentUser.tipo &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;) {
     // Si el usuario está logueado y es admin, permite el acceso.
     return true;
   }
 
-  // Si no, redirige a la página de inicio y deniega el acceso.
+  // Si no se cumplen las condiciones, redirige a la página de inicio y deniega el acceso.
   router.navigate([&#x27;/home&#x27;]);
   return false;
 }</code>

@@ -124,6 +124,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que gestiona el panel de administración (dashboard).
+Muestra una tabla con todos los usuarios registrados y permite realizar
+operaciones de edición y eliminación sobre ellos.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -275,12 +284,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:63</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente. Inyecta los servicios necesarios.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -289,6 +300,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -303,6 +315,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Servicio para gestionar las operaciones de los usuarios (CRUD).</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>authService</td>
@@ -315,6 +331,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Servicio para obtener la sesión del usuario actual.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>fb</td>
@@ -327,6 +347,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Servicio FormBuilder para crear el formulario reactivo de edición.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -366,14 +390,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:152</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un usuario de la lista, previa confirmación.
+Incluye una validación para prevenir que el administrador se elimine a sí mismo.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -384,6 +411,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -398,6 +426,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El objeto <code>User</code> que se va a eliminar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -407,7 +439,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>void</p>
+
                             </div>
                 </td>
             </tr>
@@ -433,19 +466,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:109</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Método del ciclo de vida de Angular. Se ejecuta cuando el componente es destruido.
+Se encarga de limpiar la suscripción al <code>AuthService</code> para prevenir fugas de memoria.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -470,19 +510,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:89</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Método del ciclo de vida de Angular. Se ejecuta al inicializar el componente.
+Crea el formulario de edición y la instancia del modal de Bootstrap.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -507,14 +554,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:119</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre el modal de edición y carga los datos del usuario seleccionado en el formulario.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -525,6 +574,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -539,6 +589,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El objeto <code>User</code> que se va a editar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -548,7 +602,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>void</p>
+
                             </div>
                 </td>
             </tr>
@@ -574,19 +629,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Se ejecuta al guardar los cambios en el modal de edición.
+Valida el formulario y llama al servicio para actualizar los datos del usuario.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -617,10 +679,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:63</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena la suscripción al estado de autenticación para poder desuscribirse
+cuando el componente se destruye y evitar fugas de memoria.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -648,10 +717,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:41</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena el correo del administrador actual para deshabilitar el botón de auto-eliminación.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -674,10 +749,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>El FormGroup para el formulario de edición de usuario en el modal.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -701,10 +782,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Instancia del modal de edición de Bootstrap para poder controlarlo programáticamente.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -727,10 +814,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Un Observable que emite la lista de todos los usuarios.
+La plantilla se suscribe a este observable para mostrar los datos en la tabla.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -759,10 +853,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/admin/dashboard/dashboard.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena temporalmente el objeto de usuario que se está editando en el modal.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -781,6 +881,12 @@ import { AuthService, User } from &#x27;../../../core/services/auth.service&#x27
 
 declare var bootstrap: any; // Declaramos bootstrap para poder usarlo
 
+/**
+ * @description
+ * Componente que gestiona el panel de administración (dashboard).
+ * Muestra una tabla con todos los usuarios registrados y permite realizar
+ * operaciones de edición y eliminación sobre ellos.
+ */
 @Component({
   selector: &#x27;app-dashboard&#x27;,
   standalone: true,
@@ -789,14 +895,54 @@ declare var bootstrap: any; // Declaramos bootstrap para poder usarlo
   styleUrls: [&#x27;./dashboard.component.scss&#x27;]
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  /**
+   * @description
+   * Un Observable que emite la lista de todos los usuarios.
+   * La plantilla se suscribe a este observable para mostrar los datos en la tabla.
+   */
   users$: Observable&lt;User[]&gt;;
+
+  /**
+   * @description
+   * El FormGroup para el formulario de edición de usuario en el modal.
+   */
   editForm!: FormGroup;
+
+  /**
+   * @description
+   * Almacena el correo del administrador actual para deshabilitar el botón de auto-eliminación.
+   */
   currentUserEmail: string | null &#x3D; null;
   
+  /**
+   * @description
+   * Almacena temporalmente el objeto de usuario que se está editando en el modal.
+   * @private
+   */
   private userToEdit: User | null &#x3D; null;
+
+  /**
+   * @description
+   * Instancia del modal de edición de Bootstrap para poder controlarlo programáticamente.
+   * @private
+   */
   private modalInstance: any;
+
+  /**
+   * @description
+   * Almacena la suscripción al estado de autenticación para poder desuscribirse
+   * cuando el componente se destruye y evitar fugas de memoria.
+   * @private
+   */
   private authSubscription: Subscription;
 
+  /**
+   * @description
+   * Constructor del componente. Inyecta los servicios necesarios.
+   * @param adminService Servicio para gestionar las operaciones de los usuarios (CRUD).
+   * @param authService Servicio para obtener la sesión del usuario actual.
+   * @param fb Servicio FormBuilder para crear el formulario reactivo de edición.
+   */
   constructor(
     private adminService: AdminService,
     private authService: AuthService,
@@ -808,6 +954,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @description
+   * Método del ciclo de vida de Angular. Se ejecuta al inicializar el componente.
+   * Crea el formulario de edición y la instancia del modal de Bootstrap.
+   * @returns void
+   */
   ngOnInit(): void {
     this.editForm &#x3D; this.fb.group({
       nombre: [&#x27;&#x27;, Validators.required],
@@ -822,10 +974,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * @description
+   * Método del ciclo de vida de Angular. Se ejecuta cuando el componente es destruido.
+   * Se encarga de limpiar la suscripción al &#x60;AuthService&#x60; para prevenir fugas de memoria.
+   * @returns void
+   */
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
   }
 
+  /**
+   * @description
+   * Abre el modal de edición y carga los datos del usuario seleccionado en el formulario.
+   * @param user El objeto &#x60;User&#x60; que se va a editar.
+   * @returns void
+   */
   openEditModal(user: User): void {
     this.userToEdit &#x3D; user;
     this.editForm.setValue({
@@ -837,6 +1001,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.modalInstance.show();
   }
 
+  /**
+   * @description
+   * Se ejecuta al guardar los cambios en el modal de edición.
+   * Valida el formulario y llama al servicio para actualizar los datos del usuario.
+   * @returns void
+   */
   saveChanges(): void {
     if (this.editForm.invalid || !this.userToEdit) {
       return;
@@ -846,6 +1016,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.modalInstance.hide();
   }
 
+  /**
+   * @description
+   * Elimina un usuario de la lista, previa confirmación.
+   * Incluye una validación para prevenir que el administrador se elimine a sí mismo.
+   * @param user El objeto &#x60;User&#x60; que se va a eliminar.
+   * @returns void
+   */
   deleteUser(user: User): void {
     if (user.email &#x3D;&#x3D;&#x3D; this.currentUserEmail) {
       alert(&quot;No puedes eliminar tu propio usuario.&quot;);

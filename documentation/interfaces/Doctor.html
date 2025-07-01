@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interfaz que define la estructura de los datos de un doctor o especialista.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -317,7 +324,10 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { CartService } from &#x27;../../../core/services/cart.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
-// Definimos una interfaz para la estructura de los datos de un doctor
+/**
+ * @description
+ * Interfaz que define la estructura de los datos de un doctor o especialista.
+ */
 interface Doctor {
   nombre: string;
   descripcion: string;
@@ -325,6 +335,11 @@ interface Doctor {
   servicio: string;
 }
 
+/**
+ * @description
+ * Componente que muestra la página de la especialidad de Medicina General.
+ * Presenta una lista de doctores y permite a los usuarios agendar una hora con ellos.
+ */
 @Component({
   selector: &#x27;app-medicina-general&#x27;,
   standalone: true,
@@ -333,7 +348,11 @@ interface Doctor {
   styleUrls: [&#x27;./medicina-general.component.scss&#x27;]
 })
 export class MedicinaGeneralComponent {
-  // En lugar de tener el HTML quemado, definimos los datos aquí
+  /**
+   * @description
+   * Array que contiene los datos de los doctores de Medicina General a mostrar en la página.
+   * Esta información se utiliza para renderizar las tarjetas de los especialistas dinámicamente.
+   */
   doctores: Doctor[] &#x3D; [
     {
       nombre: &#x27;Dr. Juan Pérez&#x27;,
@@ -355,16 +374,30 @@ export class MedicinaGeneralComponent {
     }
   ];
 
+  /**
+   * @description
+   * Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
+   * después de intentar agendar una hora.
+   */
   mensaje: { tipo: &#x27;exito&#x27; | &#x27;error&#x27;, texto: string } | null &#x3D; null;
 
+  /**
+   * @description
+   * Constructor del componente. Inyecta los servicios necesarios.
+   * @param cartService El servicio para gestionar el carrito de horas agendadas.
+   * @param router El servicio de enrutamiento para redirigir al usuario si es necesario.
+   */
   constructor(
     private cartService: CartService,
     private router: Router
   ) {}
 
   /**
-   * Llama al servicio del carrito para agendar una hora.
-   * @param servicioNombre - El nombre del servicio a agendar.
+   * @description
+   * Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
+   * Llama al &#x60;CartService&#x60; para añadir el servicio seleccionado al carrito del usuario.
+   * @param servicioNombre El nombre del servicio específico que se va a agendar.
+   * @returns void
    */
   agendarHora(servicioNombre: string): void {
     const resultado &#x3D; this.cartService.addItem(servicioNombre);
