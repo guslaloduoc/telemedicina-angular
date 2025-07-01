@@ -124,6 +124,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que muestra la página de la especialidad de Psicología.
+Presenta una lista de psicólogos y permite a los usuarios agendar una hora con ellos.</p>
+
+    </p>
 
 
 
@@ -240,12 +248,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:59</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente. Inyecta los servicios necesarios.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -254,6 +264,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -268,6 +279,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>El servicio para gestionar el carrito de horas agendadas.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -280,6 +295,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>El servicio de enrutamiento para redirigir al usuario si es necesario.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -319,15 +338,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:79</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Llama al servicio del carrito para agendar una hora.</p>
+                        <div class="io-description"><p>Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
+Llama al <code>CartService</code> para añadir el servicio seleccionado al carrito del usuario.</p>
 </div>
 
                             <div class="io-description">
@@ -355,9 +375,7 @@
 
 
                                             <td>
-                                                    <ul>
-<li>El nombre del servicio a agendar.</li>
-</ul>
+                                                    <p>El nombre del servicio específico que se va a agendar.</p>
 
                                             </td>
                                         </tr>
@@ -369,7 +387,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>void</p>
+
                             </div>
                 </td>
             </tr>
@@ -405,10 +424,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
+después de intentar agendar una hora.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -455,10 +481,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array que contiene los datos de los psicólogos a mostrar en la página.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -473,7 +505,9 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { CartService } from &#x27;../../../core/services/cart.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
-// La interfaz Doctor es reutilizable
+// FIX: Interfaz definida localmente para solucionar el problema de importación.
+// La solución ideal es mover esta interfaz a su propio archivo (ej. /src/app/core/models/doctor.model.ts)
+// y asegurarse de que la ruta de importación sea correcta.
 interface Doctor {
   nombre: string;
   descripcion: string;
@@ -481,6 +515,11 @@ interface Doctor {
   servicio: string;
 }
 
+/**
+ * @description
+ * Componente que muestra la página de la especialidad de Psicología.
+ * Presenta una lista de psicólogos y permite a los usuarios agendar una hora con ellos.
+ */
 @Component({
   selector: &#x27;app-psicologia&#x27;,
   standalone: true,
@@ -489,7 +528,10 @@ interface Doctor {
   styleUrls: [&#x27;./psicologia.component.scss&#x27;]
 })
 export class PsicologiaComponent {
-  // Cambiamos los datos para que correspondan a los psicólogos
+  /**
+   * @description
+   * Array que contiene los datos de los psicólogos a mostrar en la página.
+   */
   psicologos: Doctor[] &#x3D; [
     {
       nombre: &#x27;Lic. Sofía López&#x27;,
@@ -511,16 +553,30 @@ export class PsicologiaComponent {
     }
   ];
 
+  /**
+   * @description
+   * Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
+   * después de intentar agendar una hora.
+   */
   mensaje: { tipo: &#x27;exito&#x27; | &#x27;error&#x27;, texto: string } | null &#x3D; null;
 
+  /**
+   * @description
+   * Constructor del componente. Inyecta los servicios necesarios.
+   * @param cartService El servicio para gestionar el carrito de horas agendadas.
+   * @param router El servicio de enrutamiento para redirigir al usuario si es necesario.
+   */
   constructor(
     private cartService: CartService,
     private router: Router
   ) {}
 
   /**
-   * Llama al servicio del carrito para agendar una hora.
-   * @param servicioNombre - El nombre del servicio a agendar.
+   * @description
+   * Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
+   * Llama al &#x60;CartService&#x60; para añadir el servicio seleccionado al carrito del usuario.
+   * @param servicioNombre El nombre del servicio específico que se va a agendar.
+   * @returns void
    */
   agendarHora(servicioNombre: string): void {
     const resultado &#x3D; this.cartService.addItem(servicioNombre);
@@ -537,7 +593,8 @@ export class PsicologiaComponent {
 
     setTimeout(() &#x3D;&gt; this.mensaje &#x3D; null, 3000);
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">

@@ -317,7 +317,9 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { CartService } from &#x27;../../../core/services/cart.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
-// La interfaz Doctor es reutilizable
+// FIX: Interfaz definida localmente para solucionar el problema de importación.
+// La solución ideal es mover esta interfaz a su propio archivo (ej. /src/app/core/models/doctor.model.ts)
+// y asegurarse de que la ruta de importación sea correcta.
 interface Doctor {
   nombre: string;
   descripcion: string;
@@ -325,6 +327,11 @@ interface Doctor {
   servicio: string;
 }
 
+/**
+ * @description
+ * Componente que muestra la página de la especialidad de Psicología.
+ * Presenta una lista de psicólogos y permite a los usuarios agendar una hora con ellos.
+ */
 @Component({
   selector: &#x27;app-psicologia&#x27;,
   standalone: true,
@@ -333,7 +340,10 @@ interface Doctor {
   styleUrls: [&#x27;./psicologia.component.scss&#x27;]
 })
 export class PsicologiaComponent {
-  // Cambiamos los datos para que correspondan a los psicólogos
+  /**
+   * @description
+   * Array que contiene los datos de los psicólogos a mostrar en la página.
+   */
   psicologos: Doctor[] &#x3D; [
     {
       nombre: &#x27;Lic. Sofía López&#x27;,
@@ -355,16 +365,30 @@ export class PsicologiaComponent {
     }
   ];
 
+  /**
+   * @description
+   * Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
+   * después de intentar agendar una hora.
+   */
   mensaje: { tipo: &#x27;exito&#x27; | &#x27;error&#x27;, texto: string } | null &#x3D; null;
 
+  /**
+   * @description
+   * Constructor del componente. Inyecta los servicios necesarios.
+   * @param cartService El servicio para gestionar el carrito de horas agendadas.
+   * @param router El servicio de enrutamiento para redirigir al usuario si es necesario.
+   */
   constructor(
     private cartService: CartService,
     private router: Router
   ) {}
 
   /**
-   * Llama al servicio del carrito para agendar una hora.
-   * @param servicioNombre - El nombre del servicio a agendar.
+   * @description
+   * Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
+   * Llama al &#x60;CartService&#x60; para añadir el servicio seleccionado al carrito del usuario.
+   * @param servicioNombre El nombre del servicio específico que se va a agendar.
+   * @returns void
    */
   agendarHora(servicioNombre: string): void {
     const resultado &#x3D; this.cartService.addItem(servicioNombre);
@@ -381,7 +405,8 @@ export class PsicologiaComponent {
 
     setTimeout(() &#x3D;&gt; this.mensaje &#x3D; null, 3000);
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 
