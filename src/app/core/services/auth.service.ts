@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, filter } from 'rxjs/operators';
 import { AdminService } from '../../features/admin/services/admin.service';
 
 /**
@@ -50,22 +50,26 @@ export class AuthService {
     return this.currentUserSessionSubject.value;
   }
 
-  login(email: string, password: string): boolean {
-    const usuarios = this.adminService.currentUsersValue;
-    const usuarioEncontrado = usuarios.find(u => u.email === email && u.password === password);
-
-    if (usuarioEncontrado) {
-      const sesion: UserSession = { 
-        logueado: true,
-        correo: usuarioEncontrado.email,
-        tipo: usuarioEncontrado.tipo
-      };
-      localStorage.setItem('sesion', JSON.stringify(sesion));
-      this.currentUserSessionSubject.next(sesion);
-      this.router.navigate([usuarioEncontrado.tipo === 'admin' ? '/admin' : '/user/perfil']);
-      return true;
-    }
-    return false;
+  login(email: string, password: string): Observable<UserSession | null> {
+    return this.adminService.users$.pipe(
+      filter(users => users.length > 0),
+      take(1),
+      map(users => {
+        const usuarioEncontrado = users.find(u => u.email === email && u.password === password);
+        if (usuarioEncontrado) {
+          const sesion: UserSession = { 
+            logueado: true,
+            correo: usuarioEncontrado.email,
+            tipo: usuarioEncontrado.tipo
+          };
+          localStorage.setItem('sesion', JSON.stringify(sesion));
+          this.currentUserSessionSubject.next(sesion);
+          this.router.navigate([usuarioEncontrado.tipo === 'admin' ? '/admin' : '/user/perfil']);
+          return sesion;
+        }
+        return null;
+      })
+    );
   }
   
   register(newUser: User): Observable<boolean> {
@@ -88,12 +92,6 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
 
-  /**
-   * @description
-   * Verifica si un correo electrónico ya existe consultando la lista del AdminService.
-   * @param email El correo a verificar.
-   * @returns Un `Observable` que emite `true` si el email existe, `false` en caso contrario.
-   */
   checkEmailExists(email: string): Observable<boolean> {
     return this.adminService.users$.pipe(
       take(1),
@@ -101,24 +99,17 @@ export class AuthService {
     );
   }
 
-  /**
-   * @description
-   * Actualiza la contraseña de un usuario, delegando la operación al AdminService.
-   * @param email El correo del usuario.
-   * @param newPassword La nueva contraseña.
-   * @returns `true` si la contraseña se actualizó, `false` si el usuario no existe.
-   */
   recoverPassword(email: string, newPassword: string): boolean {
     const users = this.adminService.currentUsersValue;
-    const userIndex = users.findIndex(u => u.email === email);
+    const userToUpdate = users.find(u => u.email === email);
 
-    if (userIndex === -1) {
-      return false; // Usuario no encontrado
+    if (!userToUpdate) {
+      return false;
     }
 
-    const userToUpdate = { ...users[userIndex], password: newPassword };
-    this.adminService.updateUser(userToUpdate);
+    const updatedUser = { ...userToUpdate, password: newPassword };
+    this.adminService.updateUser(updatedUser);
     
-    return true; // Actualización exitosa
+    return true;
   }
 }

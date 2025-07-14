@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment'; // 1. Importar environment
 
 /**
  * @description
@@ -35,7 +36,7 @@ export interface Especialidad {
   providedIn: 'root'
 })
 export class EspecialidadesService {
-  private apiUrl = 'http://localhost:3000/especialidades';
+   private apiUrl = `${environment.apiUrl}/especialidades`;
 
   constructor(private http: HttpClient) { }
 

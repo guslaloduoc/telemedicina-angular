@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # --- Servicio para el Frontend (Angular) ---
+  frontend:
+    build: .
+    container_name: telemedicina-frontend
+    ports:
+      - "4200:80"
+    restart: always
+    depends_on:
+      - api
+
+  # --- Servicio para la API (json-server) ---
+  api:
+    image: vimagick/json-server
+    container_name: telemedicina-api
+    # FIX: Usamos -h (minúscula) en lugar de -H para el host.
+    command: -h 0.0.0.0 -p 80 -w db.json
+    ports:
+      - "3000:80"
+    volumes:
+      # Montamos el db.json en la carpeta /data del contenedor, que es donde el comando lo buscará.
+      - ./src/app/core/db/db.json:/data/db.json
+    restart: always

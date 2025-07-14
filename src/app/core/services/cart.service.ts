@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService, UserSession } from './auth.service';
+import { environment } from '../../../environments/environment'; // 1. Importar environment
 
 /**
  * @description
@@ -24,7 +25,8 @@ export interface CartItem {
   providedIn: 'root'
 })
 export class CartService {
-  private apiUrl = 'http://localhost:3000/carrito';
+
+  private apiUrl = `${environment.apiUrl}/carrito`;
 
   /**
    * @description

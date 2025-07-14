@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../../../core/services/auth.service'; // FIX: Ruta de importación actualizada
+import { User } from '../../../core/services/auth.service'; // FIX: Importar desde AuthService
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private apiUrl = `${environment.apiUrl}/usuarios`;
   private usersSubject = new BehaviorSubject<User[]>([]);
   public users$: Observable<User[]> = this.usersSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.http.get<User[]>(this.apiUrl).subscribe(users => {
       this.usersSubject.next(users);
-      console.log('Fuente de verdad: Usuarios cargados en AdminService.');
     });
   }
-
+  
   public get currentUsersValue(): User[] {
     return this.usersSubject.value;
   }

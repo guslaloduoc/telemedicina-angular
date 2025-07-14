@@ -1,80 +1,78 @@
 import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { AuthService, User, UserSession } from './auth.service';
-import { of } from 'rxjs';
-
-// FIX: Mock del AuthService ahora incluye la propiedad que vamos a espiar
-const authServiceMock = {
-  get currentUserValue(): UserSession | null {
-    return null;
-  }
-};
+import { AdminService } from '../../features/admin/services/admin.service';
+import { BehaviorSubject } from 'rxjs';
 
 describe('UserService', () => {
   let service: UserService;
-  let authService: AuthService;
+  let authServiceMock: any;
+  let adminServiceMock: any;
+  let sessionSubject: BehaviorSubject<UserSession | null>;
+  let usersSubject: BehaviorSubject<User[]>;
 
   const mockUsers: User[] = [
-    { nombre: 'Test User', email: 'test@user.com', tipo: 'usuario', password: '123' },
-    { nombre: 'Admin User', email: 'admin@user.com', tipo: 'admin', password: '456' }
+    { id: 1, nombre: 'Test User', email: 'test@user.com', tipo: 'usuario' },
+    { id: 2, nombre: 'Admin User', email: 'admin@user.com', tipo: 'admin' }
   ];
 
   beforeEach(() => {
+    sessionSubject = new BehaviorSubject<UserSession | null>(null);
+    usersSubject = new BehaviorSubject<User[]>([]);
+
+    authServiceMock = {
+      currentUserSession$: sessionSubject.asObservable()
+    };
+    adminServiceMock = {
+      users$: usersSubject.asObservable(),
+      updateUser: jasmine.createSpy('updateUser') // Creamos un espía para el método updateUser
+    };
+
     TestBed.configureTestingModule({
       providers: [
         UserService,
-        { provide: AuthService, useValue: authServiceMock }
+        { provide: AuthService, useValue: authServiceMock },
+        { provide: AdminService, useValue: adminServiceMock }
       ]
     });
     service = TestBed.inject(UserService);
-    authService = TestBed.inject(AuthService);
-    localStorage.clear();
-    localStorage.setItem('usuarios', JSON.stringify(mockUsers));
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  // Prueba para la obtención del perfil
-  it('debería obtener el perfil correcto del usuario logueado', (done) => {
-    // 1. Arrange: Simulamos una sesión activa usando un spy en la propiedad de solo lectura
-    spyOnProperty(authService, 'currentUserValue', 'get').and.returnValue({ 
-      logueado: true, 
-      correo: 'test@user.com', 
-      tipo: 'usuario' 
-    });
+  it('debería obtener el perfil correcto cuando la sesión y los usuarios están disponibles', (done) => {
+    sessionSubject.next({ logueado: true, correo: 'test@user.com', tipo: 'usuario' });
+    usersSubject.next(mockUsers);
 
-    // 2. Act: Llamamos al método
     service.getCurrentUserProfile().subscribe(profile => {
-      // 3. Assert: Verificamos que el perfil devuelto sea el correcto
       expect(profile).toBeTruthy();
       expect(profile?.email).toBe('test@user.com');
       expect(profile?.nombre).toBe('Test User');
-      done(); // Indicamos que la prueba asíncrona ha terminado
+      done();
     });
   });
 
-  // Prueba para la actualización del perfil
-  it('debería actualizar los datos de un usuario en localStorage', () => {
-    // 1. Arrange: Datos actualizados
-    const updatedProfile: User = {
-      nombre: 'Updated Name',
-      usuario: 'updateduser',
-      email: 'test@user.com', // El email no cambia
-      tipo: 'usuario'
-    };
+  it('debería devolver null si no hay sesión, incluso si hay usuarios', (done) => {
+    sessionSubject.next(null);
+    usersSubject.next(mockUsers);
 
-    // 2. Act: Ejecutamos la actualización
-    const resultado = service.updateUserProfile(updatedProfile);
+    service.getCurrentUserProfile().subscribe(profile => {
+      expect(profile).toBeNull();
+      done();
+    });
+  });
 
-    // 3. Assert: Verificamos el resultado
-    expect(resultado).toBe(true);
-    const usersFromStorage = JSON.parse(localStorage.getItem('usuarios')!);
-    const userFromStorage = usersFromStorage.find((u: User) => u.email === 'test@user.com');
-    expect(userFromStorage.nombre).toBe('Updated Name');
-    expect(userFromStorage.usuario).toBe('updateduser');
-    // Verificamos que la contraseña no se haya borrado
-    expect(userFromStorage.password).toBe('123');
+  // FIX: La prueba ahora verifica que se llame al método correcto en el servicio dependiente.
+  it('debería llamar a adminService.updateUser al actualizar el perfil', () => {
+    // 1. Arrange: Datos del perfil a actualizar
+    const updatedProfile: User = { id: 1, nombre: 'Updated Name', email: 'test@user.com', tipo: 'usuario' };
+
+    // 2. Act: Llamamos al método
+    service.updateUserProfile(updatedProfile);
+
+    // 3. Assert: Verificamos que el espía en adminServiceMock.updateUser haya sido llamado con los datos correctos.
+    expect(adminServiceMock.updateUser).toHaveBeenCalledWith(updatedProfile);
   });
 });
