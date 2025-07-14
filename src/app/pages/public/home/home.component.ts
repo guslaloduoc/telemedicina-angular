@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; // 1. Importar RouterModule
 
 /**
  * @description
@@ -7,10 +9,15 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'app-home',
-  standalone: false,
+  standalone: true, 
+  imports: [
+    CommonModule,
+    RouterModule 
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent {
 
 }

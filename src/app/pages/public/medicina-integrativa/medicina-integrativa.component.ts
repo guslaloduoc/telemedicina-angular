@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/services/cart.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { EspecialidadesService } from '../../../core/services/especialidades.service';
 
 /**
  * @description
- * Interfaz que define la estructura de los datos de un doctor o especialista.
+ * Interfaz local que define la estructura de los datos de un doctor o especialista.
  * @internal
  */
 interface Doctor {
+  id: number;
   nombre: string;
   descripcion: string;
   imagen: string;
@@ -18,7 +21,7 @@ interface Doctor {
 /**
  * @description
  * Componente que muestra la página de la especialidad de Medicina Integrativa.
- * Presenta una lista de especialistas y permite a los usuarios agendar una hora con ellos.
+ * Presenta una lista de especialistas obtenida desde un servicio y permite agendar horas.
  */
 @Component({
   selector: 'app-medicina-integrativa',
@@ -27,55 +30,45 @@ interface Doctor {
   templateUrl: './medicina-integrativa.component.html',
   styleUrls: ['./medicina-integrativa.component.scss']
 })
-export class MedicinaIntegrativaComponent {
+export class MedicinaIntegrativaComponent implements OnInit {
   /**
    * @description
-   * Array que contiene los datos de los especialistas en Medicina Integrativa a mostrar.
+   * Un Observable que emite la lista de especialistas para esta sección.
    */
-  especialistas: Doctor[] = [
-    {
-      nombre: 'Dr. David Rojas',
-      descripcion: 'Enfoque holístico que combina la medicina convencional con terapias de nutrición y bienestar general para un equilibrio completo.',
-      imagen: 'medicina-general.jpg',
-      servicio: 'Consulta con Dr. David Rojas'
-    },
-    {
-      nombre: 'Dra. Isabela Muñoz',
-      descripcion: 'Especialista en terapias alternativas como acupuntura y mindfulness para el manejo del dolor crónico y el estrés.',
-      imagen: 'psicologia.jpeg',
-      servicio: 'Consulta con Dra. Isabela Muñoz'
-    },
-    {
-      nombre: 'Dr. Ricardo Soto',
-      descripcion: 'Combinación de tratamientos convencionales con terapias naturales y suplementación para optimizar la salud y prevenir enfermedades.',
-      imagen: 'medicina-integrativa.jpg',
-      servicio: 'Consulta con Dr. Ricardo Soto'
-    }
-  ];
+  especialistas$!: Observable<Doctor[]>;
 
   /**
    * @description
-   * Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
-   * después de intentar agendar una hora.
+   * Almacena un mensaje de feedback para mostrar al usuario.
    */
   mensaje: { tipo: 'exito' | 'error', texto: string } | null = null;
 
   /**
    * @description
    * Constructor del componente. Inyecta los servicios necesarios.
-   * @param cartService El servicio para gestionar el carrito de horas agendadas.
-   * @param router El servicio de enrutamiento para redirigir al usuario si es necesario.
+   * @param cartService El servicio para gestionar el carrito.
+   * @param router El servicio de enrutamiento.
+   * @param especialidadesService El servicio para obtener los datos de los doctores.
    */
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private especialidadesService: EspecialidadesService
   ) {}
 
   /**
    * @description
+   * Al inicializar el componente, se llama al servicio para obtener los especialistas.
+   * @returns void
+   */
+  ngOnInit(): void {
+    this.especialistas$ = this.especialidadesService.getDoctoresPorEspecialidad('medicina-integrativa');
+  }
+
+  /**
+   * @description
    * Método que se ejecuta al hacer clic en el botón "Agendar Hora".
-   * Llama al `CartService` para añadir el servicio seleccionado al carrito del usuario.
-   * @param servicioNombre El nombre del servicio específico que se va a agendar.
+   * @param servicioNombre El nombre del servicio a agendar.
    * @returns void
    */
   agendarHora(servicioNombre: string): void {

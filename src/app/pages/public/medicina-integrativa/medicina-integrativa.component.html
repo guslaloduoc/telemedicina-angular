@@ -5,14 +5,12 @@
     <p class="lead text-muted">Un enfoque que une lo mejor de la medicina convencional y las terapias alternativas para un cuidado completo de tu salud.</p>
   </div>
 
-  <!-- Contenedor para mensajes de feedback -->
   <div *ngIf="mensaje" class="alert mb-4" [ngClass]="{'alert-success': mensaje.tipo === 'exito', 'alert-danger': mensaje.tipo === 'error'}">
     {{ mensaje.texto }}
   </div>
 
-  <section class="row">
-
-    <!-- Usamos *ngFor para iterar sobre la lista de especialistas -->
+  <!-- Usamos el pipe async para suscribirnos al observable especialistas$ -->
+  <section class="row" *ngIf="especialistas$ | async as especialistas; else cargando">
     <div *ngFor="let especialista of especialistas" class="col-lg-4 col-md-6 mb-4">
       <div class="card h-100 shadow-sm border-0 text-center">
         <img [src]="especialista.imagen" class="card-img-top" [alt]="especialista.nombre">
@@ -23,6 +21,10 @@
         </div>
       </div>
     </div>
-    
   </section>
+
+  <ng-template #cargando>
+    <p class="text-center">Cargando especialistas...</p>
+  </ng-template>
+
 </main>

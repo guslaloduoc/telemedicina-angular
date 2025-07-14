@@ -2,28 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { debounceTime, switchMap, first } from 'rxjs/operators';
+import { Observable, of, timer } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 import { CustomValidators } from '../../../core/validators/custom-validators';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService, User } from '../../../core/services/auth.service';
 
 /**
  * @description
  * Validador asíncrono que verifica si un correo electrónico ya está en uso.
- * Es una función de orden superior (factory) que utiliza el `AuthService`.
  * @param authService El servicio de autenticación para consultar la existencia del email.
  * @returns Una función `AsyncValidatorFn` que Angular puede utilizar.
  */
 export function emailExistsValidator(authService: AuthService): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    return of(control.value).pipe(
-      debounceTime(500), // Espera 500ms después de que el usuario deja de teclear
-      switchMap(email => 
-        authService.checkEmailExists(email) 
-          ? of({ emailExists: true }) // Si existe, devuelve un error
-          : of(null) // Si no existe, no hay error
-      ),
-      first() // Toma solo la primera emisión para completar el observable
+    if (!control.value) {
+      return of(null);
+    }
+    // Usamos un timer para esperar 500ms antes de hacer la consulta
+    return timer(500).pipe(
+      switchMap(() => 
+        // Se suscribe al Observable devuelto por el servicio
+        authService.checkEmailExists(control.value).pipe(
+          map(exists => (exists ? { emailExists: true } : null)),
+          take(1) // Se asegura de que el observable se complete
+        )
+      )
     );
   };
 }
@@ -110,7 +113,7 @@ export class RegisterComponent implements OnInit {
   /**
    * @description
    * Método que se ejecuta al enviar el formulario de registro.
-   * Valida los datos y, si son correctos, llama al servicio de autenticación para registrar al usuario.
+   * Valida los datos y se suscribe al método de registro del servicio de autenticación.
    * @returns void
    */
   onSubmit(): void {
@@ -119,15 +122,19 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    // Excluimos confirmarPassword del objeto a guardar
     const { confirmarPassword, ...userData } = this.registerForm.value;
-    const exito = this.authService.register(userData);
-
-    if (exito) {
-      this.registroExitoso = true;
-      setTimeout(() => {
-        this.router.navigate(['/auth/login']);
-      }, 2000);
-    } 
+    
+    // REFACTOR: Ahora nos suscribimos al Observable que devuelve el método register.
+    this.authService.register(userData).subscribe(exito => {
+      if (exito) {
+        this.registroExitoso = true;
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']);
+        }, 2000);
+      } else {
+        // Si el registro falla (porque el email ya existe), mostramos un error en el campo email.
+        this.registerForm.get('email')?.setErrors({ emailExists: true });
+      }
+    });
   }
 }

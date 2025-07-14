@@ -5,14 +5,12 @@
     <p class="lead text-muted">Cuida tu salud mental con nuestros psicólogos certificados. Ofrecemos un espacio seguro y confidencial para tu bienestar.</p>
   </div>
 
-  <!-- Contenedor para mensajes de feedback -->
   <div *ngIf="mensaje" class="alert mb-4" [ngClass]="{'alert-success': mensaje.tipo === 'exito', 'alert-danger': mensaje.tipo === 'error'}">
     {{ mensaje.texto }}
   </div>
 
-  <section class="row">
-
-    <!-- Usamos *ngFor para iterar sobre la lista de psicólogos -->
+  <!-- Usamos el pipe async para suscribirnos al observable psicologos$ -->
+  <section class="row" *ngIf="psicologos$ | async as psicologos; else cargando">
     <div *ngFor="let psicologo of psicologos" class="col-lg-4 col-md-6 mb-4">
       <div class="card h-100 shadow-sm border-0 text-center">
         <img [src]="psicologo.imagen" class="card-img-top" [alt]="psicologo.nombre">
@@ -23,6 +21,10 @@
         </div>
       </div>
     </div>
-    
   </section>
+
+  <ng-template #cargando>
+    <p class="text-center">Cargando especialistas...</p>
+  </ng-template>
+
 </main>

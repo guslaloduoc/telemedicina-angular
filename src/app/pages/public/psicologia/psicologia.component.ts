@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/services/cart.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { EspecialidadesService } from '../../../core/services/especialidades.service';
 
-// FIX: Interfaz definida localmente para solucionar el problema de importación.
-// La solución ideal es mover esta interfaz a su propio archivo (ej. /src/app/core/models/doctor.model.ts)
-// y asegurarse de que la ruta de importación sea correcta.
+/**
+ * @description
+ * Interfaz local que define la estructura de los datos de un doctor o especialista.
+ * @internal
+ */
 interface Doctor {
+  id: number;
   nombre: string;
   descripcion: string;
   imagen: string;
@@ -16,7 +21,7 @@ interface Doctor {
 /**
  * @description
  * Componente que muestra la página de la especialidad de Psicología.
- * Presenta una lista de psicólogos y permite a los usuarios agendar una hora con ellos.
+ * Presenta una lista de psicólogos obtenida desde un servicio y permite agendar horas.
  */
 @Component({
   selector: 'app-psicologia',
@@ -25,55 +30,45 @@ interface Doctor {
   templateUrl: './psicologia.component.html',
   styleUrls: ['./psicologia.component.scss']
 })
-export class PsicologiaComponent {
+export class PsicologiaComponent implements OnInit {
   /**
    * @description
-   * Array que contiene los datos de los psicólogos a mostrar en la página.
+   * Un Observable que emite la lista de psicólogos para esta especialidad.
    */
-  psicologos: Doctor[] = [
-    {
-      nombre: 'Lic. Sofía López',
-      descripcion: 'Especialista en terapia cognitivo-conductual. Ayuda con ansiedad, estrés y desarrollo de habilidades de afrontamiento.',
-      imagen: 'psicologia.jpeg',
-      servicio: 'Terapia con Lic. Sofía López'
-    },
-    {
-      nombre: 'Lic. Mateo Rojas',
-      descripcion: 'Enfoque en terapia de pareja y resolución de conflictos. Espacio seguro para mejorar la comunicación y la conexión.',
-      imagen: 'medicina-integrativa.jpg',
-      servicio: 'Terapia con Lic. Mateo Rojas'
-    },
-    {
-      nombre: 'Lic. Valentina Torres',
-      descripcion: 'Psicología infantil y de la adolescencia. Apoyo en el manejo de emociones, conducta y desafíos del desarrollo.',
-      imagen: 'medicina-general.jpg',
-      servicio: 'Terapia con Lic. Valentina Torres'
-    }
-  ];
+  psicologos$!: Observable<Doctor[]>;
 
   /**
    * @description
-   * Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
-   * después de intentar agendar una hora.
+   * Almacena un mensaje de feedback para mostrar al usuario.
    */
   mensaje: { tipo: 'exito' | 'error', texto: string } | null = null;
 
   /**
    * @description
    * Constructor del componente. Inyecta los servicios necesarios.
-   * @param cartService El servicio para gestionar el carrito de horas agendadas.
-   * @param router El servicio de enrutamiento para redirigir al usuario si es necesario.
+   * @param cartService El servicio para gestionar el carrito.
+   * @param router El servicio de enrutamiento.
+   * @param especialidadesService El servicio para obtener los datos de los doctores.
    */
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private especialidadesService: EspecialidadesService
   ) {}
 
   /**
    * @description
+   * Al inicializar el componente, se llama al servicio para obtener los psicólogos.
+   * @returns void
+   */
+  ngOnInit(): void {
+    this.psicologos$ = this.especialidadesService.getDoctoresPorEspecialidad('psicologia');
+  }
+
+  /**
+   * @description
    * Método que se ejecuta al hacer clic en el botón "Agendar Hora".
-   * Llama al `CartService` para añadir el servicio seleccionado al carrito del usuario.
-   * @param servicioNombre El nombre del servicio específico que se va a agendar.
+   * @param servicioNombre El nombre del servicio a agendar.
    * @returns void
    */
   agendarHora(servicioNombre: string): void {

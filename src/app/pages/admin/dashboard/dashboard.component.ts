@@ -155,7 +155,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return;
     }
     if (confirm(`¿Estás seguro de eliminar a ${user.nombre}?`)) {
-      this.adminService.deleteUser(user.email);
+      // FIX: Usamos el ID del usuario, que ahora viene de la API
+      this.adminService.deleteUser(user.id!); 
     }
   }
 }

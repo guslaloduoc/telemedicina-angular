@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   /**
    * @description
    * Método que se ejecuta cuando el usuario envía el formulario.
-   * Valida los datos y llama al servicio de autenticación.
+   * Valida los datos y llama al método síncrono de login del servicio de autenticación.
    * @returns void
    */
   onSubmit(): void {
@@ -79,10 +79,13 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    // REFACTOR: Volvemos a la llamada síncrona, ya que el servicio ahora devuelve un booleano.
     const exito = this.authService.login(this.f['email'].value, this.f['password'].value);
 
     if (!exito) {
+      // Si el método devuelve false, significa que el login falló.
       this.loginInvalido = true;
     }
+    // Si el login es exitoso, el AuthService ya se encarga de la redirección.
   }
 }

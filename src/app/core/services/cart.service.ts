@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService, UserSession } from './auth.service';
@@ -9,64 +10,50 @@ import { AuthService, UserSession } from './auth.service';
  * Representa una hora de servicio agendada por un usuario.
  */
 export interface CartItem {
-  /**
-   * @description
-   * El nombre del servicio o consulta agendada.
-   */
+  id?: number; // El ID será proporcionado por la API
   servicio: string;
-  /**
-   * @description
-   * El correo electrónico del usuario que agendó el servicio.
-   * Se utiliza como identificador único.
-   */
   usuario: string;  // Email del usuario
 }
 
 /**
  * @description
  * Servicio para gestionar el estado del carrito de compras de la aplicación.
- * Encapsula toda la lógica para agregar, eliminar y consultar items del carrito,
- * manteniendo el estado sincronizado con el localStorage.
+ * Carga los datos iniciales desde una API y simula las operaciones de escritura.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private apiUrl = 'http://localhost:3000/carrito';
+
   /**
    * @description
-   * Subject que contiene el estado actual de todos los items del carrito de todos los usuarios.
-   * Es privado para controlar cómo se emiten los nuevos valores.
+   * Subject que contiene el estado actual de todos los items del carrito.
    * @private
    */
-  private cartSubject: BehaviorSubject<CartItem[]>;
+  private cartSubject = new BehaviorSubject<CartItem[]>([]);
 
   /**
    * @description
-   * Observable público que los componentes pueden suscribir para recibir
-   * actualizaciones en tiempo real del estado del carrito.
+   * Observable público del estado del carrito.
    */
-  public cart$: Observable<CartItem[]>;
+  public cart$: Observable<CartItem[]> = this.cartSubject.asObservable();
 
   /**
    * @description
-   * Almacena la sesión del usuario actual para realizar operaciones filtradas.
+   * Almacena la sesión del usuario actual.
    * @private
    */
-  private currentUser: UserSession | null | undefined; 
+  private currentUser: UserSession | null = null;
 
   /**
    * @description
-   * Inicializa el servicio, cargando el estado inicial del carrito desde localStorage
-   * y suscribiéndose a los cambios de la sesión de autenticación.
-   * @param authService El servicio de autenticación para obtener la sesión del usuario.
+   * Inicializa el servicio, carga el carrito desde la API y se suscribe a la sesión.
+   * @param authService El servicio de autenticación.
+   * @param http El cliente HTTP para peticiones a la API.
    */
-  constructor(private authService: AuthService) {
-    // Leemos el carrito inicial desde localStorage
-    const initialCart = JSON.parse(localStorage.getItem('carrito') || '[]');
-    this.cartSubject = new BehaviorSubject<CartItem[]>(initialCart);
-    this.cart$ = this.cartSubject.asObservable();
-
-    // Nos suscribimos a los cambios de sesión para saber quién es el usuario actual
+  constructor(private authService: AuthService, private http: HttpClient) {
+    this.loadInitialCart();
     this.authService.currentUserSession$.subscribe(user => {
       this.currentUser = user;
     });
@@ -74,9 +61,20 @@ export class CartService {
 
   /**
    * @description
-   * Filtra el observable del carrito para devolver solo los items
-   * que pertenecen al usuario actualmente logueado.
-   * @returns Un `Observable` que emite un array de `CartItem` para el usuario actual.
+   * Realiza una petición GET inicial para poblar el carrito en memoria.
+   * @private
+   */
+  private loadInitialCart(): void {
+    this.http.get<CartItem[]>(this.apiUrl).subscribe(cartItems => {
+      this.cartSubject.next(cartItems);
+      console.log('Carrito cargado desde la API simulada.');
+    });
+  }
+
+  /**
+   * @description
+   * Filtra el carrito para devolver solo los items del usuario actual.
+   * @returns Un `Observable` con los items del carrito del usuario.
    */
   getItemsForCurrentUser(): Observable<CartItem[]> {
     return this.cart$.pipe(
@@ -86,10 +84,9 @@ export class CartService {
 
   /**
    * @description
-   * Agrega un nuevo servicio al carrito para el usuario actual.
-   * Realiza validaciones para asegurar que el usuario esté logueado y que el item no exista previamente.
+   * SIMULACIÓN DE POST: Agrega un nuevo servicio al carrito en memoria.
    * @param servicioNombre El nombre del servicio a agregar.
-   * @returns Un objeto que indica si la operación fue exitosa (`success`) y un mensaje (`message`).
+   * @returns Un objeto con el resultado de la operación.
    */
   addItem(servicioNombre: string): { success: boolean; message: string } {
     if (!this.currentUser) {
@@ -106,34 +103,33 @@ export class CartService {
     }
 
     const newItem: CartItem = {
+      // Simulamos la creación de un ID único
+      id: new Date().getTime(),
       servicio: servicioNombre,
       usuario: this.currentUser.correo
     };
 
     const updatedCart = [...currentCart, newItem];
-    this.updateCart(updatedCart);
+    this.cartSubject.next(updatedCart); // Solo notificamos el cambio en memoria
     
     return { success: true, message: `"${servicioNombre}" fue agregado a tus horas agendadas.` };
   }
 
   /**
    * @description
-   * Elimina un item específico del carrito.
+   * SIMULACIÓN DE DELETE: Elimina un item del carrito en memoria.
    * @param itemToRemove El objeto `CartItem` a eliminar.
    * @returns void
    */
   removeItem(itemToRemove: CartItem): void {
     const currentCart = this.cartSubject.value;
-    const updatedCart = currentCart.filter(item => 
-      !(item.servicio === itemToRemove.servicio && item.usuario === itemToRemove.usuario)
-    );
-    this.updateCart(updatedCart);
+    const updatedCart = currentCart.filter(item => item.id !== itemToRemove.id);
+    this.cartSubject.next(updatedCart);
   }
 
   /**
    * @description
-   * Confirma las horas agendadas, eliminando todos los items del carrito
-   * que pertenecen al usuario actual.
+   * SIMULACIÓN DE DELETE MÚLTIPLE: Confirma las horas, eliminando los items del usuario.
    * @returns void
    */
   confirmarHoras(): void {
@@ -141,19 +137,6 @@ export class CartService {
 
     const currentCart = this.cartSubject.value;
     const updatedCart = currentCart.filter(item => item.usuario !== this.currentUser!.correo);
-    this.updateCart(updatedCart);
-  }
-
-  /**
-   * @description
-   * Método privado para centralizar la actualización del estado del carrito.
-   * Guarda el nuevo estado en localStorage y emite el nuevo valor a través del `cartSubject`.
-   * @param cart El nuevo array de `CartItem` a guardar.
-   * @private
-   * @returns void
-   */
-  private updateCart(cart: CartItem[]): void {
-    localStorage.setItem('carrito', JSON.stringify(cart));
-    this.cartSubject.next(cart); // Notifica a todos los suscriptores del cambio
+    this.cartSubject.next(updatedCart);
   }
 }

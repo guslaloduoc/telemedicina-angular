@@ -1,0 +1,100 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Administrador",
+      "usuario": "admin",
+      "email": "dayanaolivares377@gmail.com",
+      "password": "Admin123",
+      "tipo": "admin",
+      "fechaNacimiento": "1990-01-01"
+    }
+  ],
+  "carrito": [],
+  "especialidades": [
+    {
+      "id": "medicina-general",
+      "nombre": "Medicina General",
+      "descripcion": "Encuentra y agenda una hora con nuestros médicos generales. Recibe atención primaria de calidad desde la comodidad de tu hogar.",
+      "doctores": [
+        {
+          "id": 101,
+          "nombre": "Dr. Juan Pérez",
+          "descripcion": "Especialista en medicina familiar y atención primaria. Enfoque en prevención y manejo de enfermedades crónicas.",
+          "imagen": "medicina-general.jpg",
+          "servicio": "Consulta con Dr. Juan Pérez"
+        },
+        {
+          "id": 102,
+          "nombre": "Dra. Ana García",
+          "descripcion": "Atención integral para adultos y niños. Experiencia en el manejo de condiciones agudas y chequeos preventivos.",
+          "imagen": "psicologia.jpeg",
+          "servicio": "Consulta con Dra. Ana García"
+        },
+        {
+          "id": 103,
+          "nombre": "Dr. Carlos Martínez",
+          "descripcion": "Médico general con interés en dermatología y pequeñas dolencias. Orientado a soluciones rápidas y efectivas.",
+          "imagen": "medicina-integrativa.jpg",
+          "servicio": "Consulta con Dr. Carlos Martínez"
+        }
+      ]
+    },
+    {
+      "id": "psicologia",
+      "nombre": "Psicología en Línea",
+      "descripcion": "Cuida tu salud mental con nuestros psicólogos certificados. Ofrecemos un espacio seguro y confidencial para tu bienestar.",
+      "doctores": [
+        {
+          "id": 201,
+          "nombre": "Lic. Sofía López",
+          "descripcion": "Especialista en terapia cognitivo-conductual. Ayuda con ansiedad, estrés y desarrollo de habilidades de afrontamiento.",
+          "imagen": "psicologia.jpeg",
+          "servicio": "Terapia con Lic. Sofía López"
+        },
+        {
+          "id": 202,
+          "nombre": "Lic. Mateo Rojas",
+          "descripcion": "Enfoque en terapia de pareja y resolución de conflictos. Espacio seguro para mejorar la comunicación y la conexión.",
+          "imagen": "medicina-integrativa.jpg",
+          "servicio": "Terapia con Lic. Mateo Rojas"
+        },
+        {
+          "id": 203,
+          "nombre": "Lic. Valentina Torres",
+          "descripcion": "Psicología infantil y de la adolescencia. Apoyo en el manejo de emociones, conducta y desafíos del desarrollo.",
+          "imagen": "medicina-general.jpg",
+          "servicio": "Terapia con Lic. Valentina Torres"
+        }
+      ]
+    },
+    {
+      "id": "medicina-integrativa",
+      "nombre": "Medicina Integrativa",
+      "descripcion": "Un enfoque que une lo mejor de la medicina convencional y las terapias alternativas para un cuidado completo de tu salud.",
+      "doctores": [
+        {
+          "id": 301,
+          "nombre": "Dr. David Rojas",
+          "descripcion": "Enfoque holístico que combina la medicina convencional con terapias de nutrición y bienestar general para un equilibrio completo.",
+          "imagen": "medicina-general.jpg",
+          "servicio": "Consulta con Dr. David Rojas"
+        },
+        {
+          "id": 302,
+          "nombre": "Dra. Isabela Muñoz",
+          "descripcion": "Especialista en terapias alternativas como acupuntura y mindfulness para el manejo del dolor crónico y el estrés.",
+          "imagen": "psicologia.jpeg",
+          "servicio": "Consulta con Dra. Isabela Muñoz"
+        },
+        {
+          "id": 303,
+          "nombre": "Dr. Ricardo Soto",
+          "descripcion": "Combinación de tratamientos convencionales con terapias naturales y suplementación para optimizar la salud y prevenir enfermedades.",
+          "imagen": "medicina-integrativa.jpg",
+          "servicio": "Consulta con Dr. Ricardo Soto"
+        }
+      ]
+    }
+  ]
+}
