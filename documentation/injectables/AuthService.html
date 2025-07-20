@@ -119,14 +119,6 @@
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Servicio que gestiona todo lo relacionado con la autenticación de usuarios en la aplicación.
-Encapsula toda la lógica para iniciar sesión, cerrar sesión, registrar y gestionar usuarios.</p>
-
-            </p>
 
 
 
@@ -163,18 +155,7 @@ Encapsula toda la lógica para iniciar sesión, cerrar sesión, registrar y gest
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#asegurarAdminPorDefecto" >asegurarAdminPorDefecto</a>
-                            </li>
-                            <li>
                                 <a href="#checkEmailExists" >checkEmailExists</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#getUsuarios" >getUsuarios</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#guardarUsuarios" >guardarUsuarios</a>
                             </li>
                             <li>
                                 <a href="#login" >login</a>
@@ -220,20 +201,17 @@ Encapsula toda la lógica para iniciar sesión, cerrar sesión, registrar y gest
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: Router)</code>
+<code>constructor(router: Router, adminService: <a href="../injectables/AdminService.html" target="_self">AdminService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/core/services/auth.service.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/core/services/auth.service.ts:36</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Inicializa el servicio, cargando la sesión inicial desde localStorage
-y suscribiéndose a los cambios en la sesión de autenticación.</p>
-</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -242,7 +220,6 @@ y suscribiéndose a los cambios en la sesión de autenticación.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -257,10 +234,18 @@ y suscribiéndose a los cambios en la sesión de autenticación.</p>
                                                             No
                                                     </td>
                                                     
+                                                </tr>
+                                                <tr>
+                                                        <td>adminService</td>
+                                                  
                                                         <td>
-                                                                <p>El servicio Router para manejar la navegación.</p>
-
+                                                                        <code><a href="../injectables/AdminService.html" target="_self" >AdminService</a></code>
                                                         </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -276,50 +261,6 @@ y suscribiéndose a los cambios en la sesión de autenticación.</p>
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="asegurarAdminPorDefecto"></a>
-                    <span class="name">
-                        <span ><b>asegurarAdminPorDefecto</b></span>
-                        <a href="#asegurarAdminPorDefecto"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>asegurarAdminPorDefecto()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="90"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:90</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Lógica de inicialización para asegurar que el usuario administrador exista.
-Será llamado por APP_INITIALIZER.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>void</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -340,16 +281,14 @@ Será llamado por APP_INITIALIZER.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="189"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:189</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:95</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Verifica si un correo electrónico ya existe en la base de datos (localStorage).</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -360,7 +299,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -375,143 +313,16 @@ Será llamado por APP_INITIALIZER.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>El correo a verificar.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                <p><code>true</code> si el email existe, <code>false</code> en caso contrario.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getUsuarios"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>getUsuarios</b></span>
-                        <a href="#getUsuarios"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUsuarios()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:145</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Método privado para interactuar con LocalStorage y obtener la lista de usuarios.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >User[]</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>La lista de usuarios.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="guardarUsuarios"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>guardarUsuarios</b></span>
-                        <a href="#guardarUsuarios"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>guardarUsuarios(usuarios: <a href="../interfaces/User.html" target="_self">User[]</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:157</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Método privado para guardar la lista de usuarios en LocalStorage.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
                                 
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>usuarios</td>
-                                            <td>
-                                                            <code><a href="../interfaces/User.html" target="_self" >User[]</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>La lista de usuarios a guardar.</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>void</p>
-
                             </div>
                 </td>
             </tr>
@@ -537,16 +348,14 @@ Será llamado por APP_INITIALIZER.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:53</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Intenta autenticar a un usuario y devuelve true/false.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -557,7 +366,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -572,10 +380,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>El email del usuario.</p>
-
-                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>password</td>
@@ -588,21 +392,16 @@ Será llamado por APP_INITIALIZER.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>La contraseña del usuario.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;UserSession | null&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                <p><code>true</code> si el login es exitoso, <code>false</code> en caso contrario.</p>
-
+                                
                             </div>
                 </td>
             </tr>
@@ -628,25 +427,19 @@ Será llamado por APP_INITIALIZER.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:89</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Cierra la sesión del usuario.</p>
-</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                            <div class="io-description">
-                                <p>void</p>
-
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -671,16 +464,14 @@ Será llamado por APP_INITIALIZER.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="201"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:201</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Actualiza la contraseña de un usuario si el email existe.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -691,7 +482,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -706,10 +496,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>El correo del usuario.</p>
-
-                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>newPassword</td>
@@ -722,10 +508,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>La nueva contraseña.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -735,8 +517,7 @@ Será llamado por APP_INITIALIZER.</p>
 
                         </div>
                             <div class="io-description">
-                                <p><code>true</code> si la contraseña se actualizó, <code>false</code> si el usuario no existe.</p>
-
+                                
                             </div>
                 </td>
             </tr>
@@ -762,16 +543,14 @@ Será llamado por APP_INITIALIZER.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:75</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Registra un nuevo usuario.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -782,7 +561,6 @@ Será llamado por APP_INITIALIZER.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -797,21 +575,16 @@ Será llamado por APP_INITIALIZER.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>El objeto del nuevo usuario a registrar.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                <p><code>true</code> si el registro es exitoso, <code>false</code> si el email ya existe.</p>
-
+                                
                             </div>
                 </td>
             </tr>
@@ -843,17 +616,10 @@ Será llamado por APP_INITIALIZER.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/core/services/auth.service.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/core/services/auth.service.ts:36</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Observable público al que los componentes pueden suscribirse para recibir
-actualizaciones en tiempo real del estado de la sesión.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -877,17 +643,10 @@ actualizaciones en tiempo real del estado de la sesión.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/core/services/auth.service.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/core/services/auth.service.ts:35</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Subject que contiene el estado actual de la sesión del usuario.
-Es privado para controlar cómo se emiten los nuevos valores.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -913,22 +672,9 @@ Es privado para controlar cómo se emiten los nuevos valores.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/core/services/auth.service.ts:80</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/core/services/auth.service.ts:49</a></div>
                                 </td>
                             </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Expone el valor actual de la sesión del usuario.</p>
-</div>
-
-                                <div>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code>UserSession | null</code>
-
-                                </div>
-                        </td>
-                    </tr>
 
             </tbody>
         </table>
@@ -939,7 +685,9 @@ Es privado para controlar cómo se emiten los nuevos valores.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { BehaviorSubject, Observable, of } from &#x27;rxjs&#x27;;
+import { map, take, filter } from &#x27;rxjs/operators&#x27;;
+import { AdminService } from &#x27;../../features/admin/services/admin.service&#x27;;
 
 /**
  * @description
@@ -947,7 +695,7 @@ import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
  */
 export interface UserSession {
   logueado: boolean;
-  correo: string; // Cambiado de &#x27;usuario&#x27; a &#x27;correo&#x27; para consistencia
+  correo: string;
   tipo: &#x27;admin&#x27; | &#x27;usuario&#x27;; 
 }
 
@@ -956,54 +704,26 @@ export interface UserSession {
  * Define la estructura de los datos de un usuario.
  */
 export interface User {
+  id?: number;
   nombre: string;
-  usuario?: string; // Opcional, ya que no se usa en la sesión
+  usuario?: string;
   email: string;
-  password?: string; // El password no debería guardarse en la sesión
+  password?: string;
   tipo: &#x27;admin&#x27; | &#x27;usuario&#x27;;
   fechaNacimiento?: string;
 }
 
-// Constante para el admin por defecto
-const DEFAULT_ADMIN: User &#x3D; {
-  nombre: &quot;Administrador&quot;,
-  usuario: &quot;admin&quot;,
-  email: &quot;dayanaolivares377@gmail.com&quot;,
-  password: &quot;Admin123&quot;,
-  tipo: &quot;admin&quot;
-};
-
-/**
- * @description
- * Servicio que gestiona todo lo relacionado con la autenticación de usuarios en la aplicación.
- * Encapsula toda la lógica para iniciar sesión, cerrar sesión, registrar y gestionar usuarios.
- */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class AuthService {
-  /**
-   * @description
-   * Subject que contiene el estado actual de la sesión del usuario.
-   * Es privado para controlar cómo se emiten los nuevos valores.
-   * @private
-   */
   private currentUserSessionSubject: BehaviorSubject&lt;UserSession | null&gt;;
-
-  /**
-   * @description
-   * Observable público al que los componentes pueden suscribirse para recibir
-   * actualizaciones en tiempo real del estado de la sesión.
-   */
   public currentUserSession$: Observable&lt;UserSession | null&gt;;
 
-  /**
-   * @description
-   * Inicializa el servicio, cargando la sesión inicial desde localStorage
-   * y suscribiéndose a los cambios en la sesión de autenticación.
-   * @param router El servicio Router para manejar la navegación.
-   */
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private adminService: AdminService
+  ) {
     const sesionGuardada &#x3D; localStorage.getItem(&#x27;sesion&#x27;);
     this.currentUserSessionSubject &#x3D; new BehaviorSubject&lt;UserSession | null&gt;(
       sesionGuardada ? JSON.parse(sesionGuardada) : null
@@ -1011,145 +731,71 @@ export class AuthService {
     this.currentUserSession$ &#x3D; this.currentUserSessionSubject.asObservable();
   }
 
-  /**
-   * @description
-   * Expone el valor actual de la sesión del usuario.
-   * @returns La sesión del usuario actual o null si no hay sesión.
-   */
   public get currentUserValue(): UserSession | null {
     return this.currentUserSessionSubject.value;
   }
 
-  /**
-   * @description
-   * Lógica de inicialización para asegurar que el usuario administrador exista.
-   * Será llamado por APP_INITIALIZER.
-   * @returns void
-   */
-  asegurarAdminPorDefecto() {
-    const usuarios &#x3D; this.getUsuarios();
-    const existeAdmin &#x3D; usuarios.some(user &#x3D;&gt; user.email &#x3D;&#x3D;&#x3D; DEFAULT_ADMIN.email);
-
-    if (!existeAdmin) {
-      usuarios.push(DEFAULT_ADMIN);
-      this.guardarUsuarios(usuarios);
-      console.log(&quot;🛠 Usuario admin creado por defecto por Angular.&quot;);
-    }
+  login(email: string, password: string): Observable&lt;UserSession | null&gt; {
+    return this.adminService.users$.pipe(
+      filter(users &#x3D;&gt; users.length &gt; 0),
+      take(1),
+      map(users &#x3D;&gt; {
+        const usuarioEncontrado &#x3D; users.find(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email &amp;&amp; u.password &#x3D;&#x3D;&#x3D; password);
+        if (usuarioEncontrado) {
+          const sesion: UserSession &#x3D; { 
+            logueado: true,
+            correo: usuarioEncontrado.email,
+            tipo: usuarioEncontrado.tipo
+          };
+          localStorage.setItem(&#x27;sesion&#x27;, JSON.stringify(sesion));
+          this.currentUserSessionSubject.next(sesion);
+          this.router.navigate([usuarioEncontrado.tipo &#x3D;&#x3D;&#x3D; &#x27;admin&#x27; ? &#x27;/admin&#x27; : &#x27;/user/perfil&#x27;]);
+          return sesion;
+        }
+        return null;
+      })
+    );
+  }
+  
+  register(newUser: User): Observable&lt;boolean&gt; {
+    return this.adminService.users$.pipe(
+      take(1),
+      map(users &#x3D;&gt; {
+        const existe &#x3D; users.some(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; newUser.email);
+        if (existe) return false;
+        
+        newUser.tipo &#x3D; &#x27;usuario&#x27;;
+        this.adminService.addUser(newUser);
+        return true;
+      })
+    );
   }
 
-  /**
-   * @description
-   * Intenta autenticar a un usuario y devuelve true/false.
-   * @param email El email del usuario.
-   * @param password La contraseña del usuario.
-   * @returns &#x60;true&#x60; si el login es exitoso, &#x60;false&#x60; en caso contrario.
-   */
-  login(email: string, password: string): boolean {
-    const usuarios &#x3D; this.getUsuarios();
-    const usuarioEncontrado &#x3D; usuarios.find(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email &amp;&amp; u.password &#x3D;&#x3D;&#x3D; password);
-
-    if (usuarioEncontrado) {
-      const sesion: UserSession &#x3D; {
-        logueado: true,
-        correo: usuarioEncontrado.email,
-        tipo: usuarioEncontrado.tipo
-      };
-      localStorage.setItem(&#x27;sesion&#x27;, JSON.stringify(sesion));
-      this.currentUserSessionSubject.next(sesion);
-      
-      this.router.navigate([usuarioEncontrado.tipo &#x3D;&#x3D;&#x3D; &#x27;admin&#x27; ? &#x27;/admin&#x27; : &#x27;/user/perfil&#x27;]);
-      return true;
-    }
-    
-    return false; // Login fallido
-  }
-
-  /**
-   * @description
-   * Cierra la sesión del usuario.
-   * @returns void
-   */
   logout() {
     localStorage.removeItem(&#x27;sesion&#x27;);
     this.currentUserSessionSubject.next(null);
     this.router.navigate([&#x27;/home&#x27;]);
   }
 
-  /**
-   * @description
-   * Método privado para interactuar con LocalStorage y obtener la lista de usuarios.
-   * @private
-   * @returns La lista de usuarios.
-   */
-  private getUsuarios(): User[] {
-    const usuarios &#x3D; localStorage.getItem(&quot;usuarios&quot;);
-    return usuarios ? JSON.parse(usuarios) : [];
+  checkEmailExists(email: string): Observable&lt;boolean&gt; {
+    return this.adminService.users$.pipe(
+      take(1),
+      map(users &#x3D;&gt; users.some(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email))
+    );
   }
 
-  /**
-   * @description
-   * Método privado para guardar la lista de usuarios en LocalStorage.
-   * @private
-   * @param usuarios La lista de usuarios a guardar.
-   * @returns void
-   */
-  private guardarUsuarios(usuarios: User[]) {
-    localStorage.setItem(&quot;usuarios&quot;, JSON.stringify(usuarios));
-  }
-
-  /**
-   * @description
-   * Registra un nuevo usuario.
-   * @param newUser El objeto del nuevo usuario a registrar.
-   * @returns &#x60;true&#x60; si el registro es exitoso, &#x60;false&#x60; si el email ya existe.
-   */
-  register(newUser: User): boolean {
-    const usuarios &#x3D; this.getUsuarios();
-    const existe &#x3D; this.checkEmailExists(newUser.email);
-
-    if (existe) {
-      return false; // El email ya está en uso
-    }
-
-    // Aseguramos que el tipo de usuario sea &#x27;usuario&#x27;
-    newUser.tipo &#x3D; &#x27;usuario&#x27;; 
-    usuarios.push(newUser);
-    this.guardarUsuarios(usuarios);
-    
-    return true; // Registro exitoso
-  }
-
-  /**
-   * @description
-   * Verifica si un correo electrónico ya existe en la base de datos (localStorage).
-   * @param email El correo a verificar.
-   * @returns &#x60;true&#x60; si el email existe, &#x60;false&#x60; en caso contrario.
-   */
-  checkEmailExists(email: string): boolean {
-    const usuarios &#x3D; this.getUsuarios();
-    return usuarios.some(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
-  }
-
-  /**
-   * @description
-   * Actualiza la contraseña de un usuario si el email existe.
-   * @param email El correo del usuario.
-   * @param newPassword La nueva contraseña.
-   * @returns &#x60;true&#x60; si la contraseña se actualizó, &#x60;false&#x60; si el usuario no existe.
-   */
   recoverPassword(email: string, newPassword: string): boolean {
-    const usuarios &#x3D; this.getUsuarios();
-    const userIndex &#x3D; usuarios.findIndex(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
+    const users &#x3D; this.adminService.currentUsersValue;
+    const userToUpdate &#x3D; users.find(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; email);
 
-    if (userIndex &#x3D;&#x3D;&#x3D; -1) {
-      return false; // Usuario no encontrado
+    if (!userToUpdate) {
+      return false;
     }
 
-    // Actualizamos la contraseña
-    usuarios[userIndex].password &#x3D; newPassword;
-    this.guardarUsuarios(usuarios);
+    const updatedUser &#x3D; { ...userToUpdate, password: newPassword };
+    this.adminService.updateUser(updatedUser);
     
-    return true; // Actualización exitosa
+    return true;
   }
 }</code></pre>
     </div>

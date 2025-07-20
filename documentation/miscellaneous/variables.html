@@ -121,7 +121,10 @@
                             <a href="#bootstrap" title="src/app/pages/admin/dashboard/dashboard.component.ts" ><b>bootstrap</b>&nbsp;&nbsp;&nbsp;(src/.../dashboard.component.ts)</a>
                         </li>
                         <li>
-                            <a href="#DEFAULT_ADMIN" title="src/app/core/services/auth.service.ts" ><b>DEFAULT_ADMIN</b>&nbsp;&nbsp;&nbsp;(src/.../auth.service.ts)</a>
+                            <a href="#environment" title="src/environments/environment.prod.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
                         </li>
                         <li>
                             <a href="#passwordMatchValidator" title="src/app/pages/auth/recover-password/recover-password.component.ts" ><b>passwordMatchValidator</b>&nbsp;&nbsp;&nbsp;(src/.../recover-password.component.ts)</a>
@@ -203,7 +206,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>(route, state) &#x3D;&gt; {
+                        <i>Default value : </i><code>(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) &#x3D;&gt; {
   const authService &#x3D; inject(AuthService);
   const router &#x3D; inject(Router);
 
@@ -250,37 +253,116 @@
         </tbody>
     </table>
 </section>
-    <h3>src/app/core/services/auth.service.ts</h3>
+    <h3>src/environments/environment.prod.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="DEFAULT_ADMIN"></a>
+                    <a name="environment"></a>
                     <span class="name">
-                        <span ><b>DEFAULT_ADMIN</b></span>
-                        <a href="#DEFAULT_ADMIN"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-  nombre: &quot;Administrador&quot;,
-  usuario: &quot;admin&quot;,
-  email: &quot;dayanaolivares377@gmail.com&quot;,
-  password: &quot;Admin123&quot;,
-  tipo: &quot;admin&quot;
+  /**
+   * Flag que indica si la aplicación debe ejecutarse
+   * en modo producción.
+   *
+   * - &#x60;true&#x60;: activa optimizaciones de bundles,
+   *   minificación, tree‑shaking y deshabilita logs
+   *   de depuración.
+   */
+  production: true,
+
+  /**
+   * URL base para las llamadas HTTP a la API del backend
+   * en producción.
+   *
+   * Debe incluir el protocolo y no terminar en &#x60;/&#x60;.
+   * Ejemplo de uso:
+   * &#x60;&#x60;&#x60;ts
+   * this.http.get(&#x60;${environment.apiUrl}/users&#x60;);
+   * &#x60;&#x60;&#x60;
+   */
+  apiUrl: &#x27;http://api&#x27;
 }</code>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuración de entorno para producción.</p>
+<p>Contiene las opciones y URLs que la aplicación usará en un despliegue
+productivo. Se activa al compilar con <code>ng build --prod</code>.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /**
+   * Indica si la aplicación está corriendo en modo producción.
+   *
+   * - &#x60;true&#x60;: optimiza bundles, activa minificación y deshabilita logs de depuración.
+   * - &#x60;false&#x60;: habilita herramientas de depuración y hot‑reload.
+   */
+  production: false,
+
+  /**
+   * URL base para las llamadas HTTP a la API del backend.
+   *
+   * Debe terminar sin slash (&#x60;/&#x60;). Ejemplo:
+   * &#x60;&#x60;&#x60;ts
+   * fetch(&#x60;${environment.apiUrl}/users&#x60;);
+   * &#x60;&#x60;&#x60;
+   */
+  apiUrl: &#x27;http://localhost:3000&#x27;
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuración de entorno para desarrollo.</p>
+<p>Contiene los flags y URLs necesarias para ejecutar la aplicación
+en modo no-productivo.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

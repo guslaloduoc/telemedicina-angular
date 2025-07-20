@@ -129,11 +129,17 @@
     </p>
     <p class="comment">
         <p>Componente que muestra la página de la especialidad de Psicología.
-Presenta una lista de psicólogos y permite a los usuarios agendar una hora con ellos.</p>
+Presenta una lista de psicólogos obtenida desde un servicio y permite agendar horas.</p>
 
     </p>
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -208,7 +214,7 @@ Presenta una lista de psicólogos y permite a los usuarios agendar una hora con 
                                 <a href="#mensaje" >mensaje</a>
                             </li>
                             <li>
-                                <a href="#psicologos" >psicologos</a>
+                                <a href="#psicologos$" >psicologos$</a>
                             </li>
                         </ul>
                     </td>
@@ -224,6 +230,9 @@ Presenta una lista de psicólogos y permite a los usuarios agendar una hora con 
                         <ul class="index-list">
                             <li>
                                 <a href="#agendarHora" >agendarHora</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -243,12 +252,12 @@ Presenta una lista de psicólogos y permite a los usuarios agendar una hora con 
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(cartService: <a href="../injectables/CartService.html" target="_self">CartService</a>, router: Router)</code>
+<code>constructor(cartService: <a href="../injectables/CartService.html" target="_self">CartService</a>, router: Router, especialidadesService: <a href="../injectables/EspecialidadesService.html" target="_self">EspecialidadesService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -280,7 +289,7 @@ Presenta una lista de psicólogos y permite a los usuarios agendar una hora con 
                                                     </td>
                                                     
                                                         <td>
-                                                                <p>El servicio para gestionar el carrito de horas agendadas.</p>
+                                                                <p>El servicio para gestionar el carrito.</p>
 
                                                         </td>
                                                 </tr>
@@ -296,7 +305,23 @@ Presenta una lista de psicólogos y permite a los usuarios agendar una hora con 
                                                     </td>
                                                     
                                                         <td>
-                                                                <p>El servicio de enrutamiento para redirigir al usuario si es necesario.</p>
+                                                                <p>El servicio de enrutamiento.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>especialidadesService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EspecialidadesService.html" target="_self" >EspecialidadesService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>El servicio para obtener los datos de los doctores.</p>
 
                                                         </td>
                                                 </tr>
@@ -338,16 +363,15 @@ Presenta una lista de psicólogos y permite a los usuarios agendar una hora con 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
-Llama al <code>CartService</code> para añadir el servicio seleccionado al carrito del usuario.</p>
+                        <div class="io-description"><p>Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.</p>
 </div>
 
                             <div class="io-description">
@@ -375,13 +399,56 @@ Llama al <code>CartService</code> para añadir el servicio seleccionado al carri
 
 
                                             <td>
-                                                    <p>El nombre del servicio específico que se va a agendar.</p>
+                                                    <p>El nombre del servicio a agendar.</p>
 
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Al inicializar el componente, se llama al servicio para obtener los psicólogos.</p>
+</div>
+
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
@@ -424,14 +491,13 @@ Llama al <code>CartService</code> para añadir el servicio seleccionado al carri
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:44</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
-después de intentar agendar una hora.</p>
+                    <div class="io-description"><p>Almacena un mensaje de feedback para mostrar al usuario.</p>
 </div>
                 </td>
             </tr>
@@ -442,52 +508,28 @@ después de intentar agendar una hora.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="psicologos"></a>
+                    <a name="psicologos$"></a>
                     <span class="name">
-                        <span ><b>psicologos</b></span>
-                        <a href="#psicologos"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>psicologos$</b></span>
+                        <a href="#psicologos$"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>Doctor[]</code>
+                        <i>Type : </i>    <code>Observable&lt;Doctor[]&gt;</code>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[
-    {
-      nombre: &#x27;Lic. Sofía López&#x27;,
-      descripcion: &#x27;Especialista en terapia cognitivo-conductual. Ayuda con ansiedad, estrés y desarrollo de habilidades de afrontamiento.&#x27;,
-      imagen: &#x27;psicologia.jpeg&#x27;,
-      servicio: &#x27;Terapia con Lic. Sofía López&#x27;
-    },
-    {
-      nombre: &#x27;Lic. Mateo Rojas&#x27;,
-      descripcion: &#x27;Enfoque en terapia de pareja y resolución de conflictos. Espacio seguro para mejorar la comunicación y la conexión.&#x27;,
-      imagen: &#x27;medicina-integrativa.jpg&#x27;,
-      servicio: &#x27;Terapia con Lic. Mateo Rojas&#x27;
-    },
-    {
-      nombre: &#x27;Lic. Valentina Torres&#x27;,
-      descripcion: &#x27;Psicología infantil y de la adolescencia. Apoyo en el manejo de emociones, conducta y desafíos del desarrollo.&#x27;,
-      imagen: &#x27;medicina-general.jpg&#x27;,
-      servicio: &#x27;Terapia con Lic. Valentina Torres&#x27;
-    }
-  ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/public/psicologia/psicologia.component.ts:38</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Array que contiene los datos de los psicólogos a mostrar en la página.</p>
+                    <div class="io-description"><p>Un Observable que emite la lista de psicólogos para esta especialidad.</p>
 </div>
                 </td>
             </tr>
@@ -500,15 +542,20 @@ después de intentar agendar una hora.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { CartService } from &#x27;../../../core/services/cart.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { EspecialidadesService } from &#x27;../../../core/services/especialidades.service&#x27;;
 
-// FIX: Interfaz definida localmente para solucionar el problema de importación.
-// La solución ideal es mover esta interfaz a su propio archivo (ej. /src/app/core/models/doctor.model.ts)
-// y asegurarse de que la ruta de importación sea correcta.
+/**
+ * @description
+ * Interfaz local que define la estructura de los datos de un doctor o especialista.
+ * @internal
+ */
 interface Doctor {
+  id: number;
   nombre: string;
   descripcion: string;
   imagen: string;
@@ -518,7 +565,7 @@ interface Doctor {
 /**
  * @description
  * Componente que muestra la página de la especialidad de Psicología.
- * Presenta una lista de psicólogos y permite a los usuarios agendar una hora con ellos.
+ * Presenta una lista de psicólogos obtenida desde un servicio y permite agendar horas.
  */
 @Component({
   selector: &#x27;app-psicologia&#x27;,
@@ -527,55 +574,45 @@ interface Doctor {
   templateUrl: &#x27;./psicologia.component.html&#x27;,
   styleUrls: [&#x27;./psicologia.component.scss&#x27;]
 })
-export class PsicologiaComponent {
+export class PsicologiaComponent implements OnInit {
   /**
    * @description
-   * Array que contiene los datos de los psicólogos a mostrar en la página.
+   * Un Observable que emite la lista de psicólogos para esta especialidad.
    */
-  psicologos: Doctor[] &#x3D; [
-    {
-      nombre: &#x27;Lic. Sofía López&#x27;,
-      descripcion: &#x27;Especialista en terapia cognitivo-conductual. Ayuda con ansiedad, estrés y desarrollo de habilidades de afrontamiento.&#x27;,
-      imagen: &#x27;psicologia.jpeg&#x27;,
-      servicio: &#x27;Terapia con Lic. Sofía López&#x27;
-    },
-    {
-      nombre: &#x27;Lic. Mateo Rojas&#x27;,
-      descripcion: &#x27;Enfoque en terapia de pareja y resolución de conflictos. Espacio seguro para mejorar la comunicación y la conexión.&#x27;,
-      imagen: &#x27;medicina-integrativa.jpg&#x27;,
-      servicio: &#x27;Terapia con Lic. Mateo Rojas&#x27;
-    },
-    {
-      nombre: &#x27;Lic. Valentina Torres&#x27;,
-      descripcion: &#x27;Psicología infantil y de la adolescencia. Apoyo en el manejo de emociones, conducta y desafíos del desarrollo.&#x27;,
-      imagen: &#x27;medicina-general.jpg&#x27;,
-      servicio: &#x27;Terapia con Lic. Valentina Torres&#x27;
-    }
-  ];
+  psicologos$!: Observable&lt;Doctor[]&gt;;
 
   /**
    * @description
-   * Almacena un mensaje de feedback (éxito o error) para mostrar al usuario
-   * después de intentar agendar una hora.
+   * Almacena un mensaje de feedback para mostrar al usuario.
    */
   mensaje: { tipo: &#x27;exito&#x27; | &#x27;error&#x27;, texto: string } | null &#x3D; null;
 
   /**
    * @description
    * Constructor del componente. Inyecta los servicios necesarios.
-   * @param cartService El servicio para gestionar el carrito de horas agendadas.
-   * @param router El servicio de enrutamiento para redirigir al usuario si es necesario.
+   * @param cartService El servicio para gestionar el carrito.
+   * @param router El servicio de enrutamiento.
+   * @param especialidadesService El servicio para obtener los datos de los doctores.
    */
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private especialidadesService: EspecialidadesService
   ) {}
 
   /**
    * @description
+   * Al inicializar el componente, se llama al servicio para obtener los psicólogos.
+   * @returns void
+   */
+  ngOnInit(): void {
+    this.psicologos$ &#x3D; this.especialidadesService.getDoctoresPorEspecialidad(&#x27;psicologia&#x27;);
+  }
+
+  /**
+   * @description
    * Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
-   * Llama al &#x60;CartService&#x60; para añadir el servicio seleccionado al carrito del usuario.
-   * @param servicioNombre El nombre del servicio específico que se va a agendar.
+   * @param servicioNombre El nombre del servicio a agendar.
    * @returns void
    */
   agendarHora(servicioNombre: string): void {
@@ -593,8 +630,7 @@ export class PsicologiaComponent {
 
     setTimeout(() &#x3D;&gt; this.mensaje &#x3D; null, 3000);
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -605,14 +641,12 @@ export class PsicologiaComponent {
     &lt;p class&#x3D;&quot;lead text-muted&quot;&gt;Cuida tu salud mental con nuestros psicólogos certificados. Ofrecemos un espacio seguro y confidencial para tu bienestar.&lt;/p&gt;
   &lt;/div&gt;
 
-  &lt;!-- Contenedor para mensajes de feedback --&gt;
   &lt;div *ngIf&#x3D;&quot;mensaje&quot; class&#x3D;&quot;alert mb-4&quot; [ngClass]&#x3D;&quot;{&#x27;alert-success&#x27;: mensaje.tipo &#x3D;&#x3D;&#x3D; &#x27;exito&#x27;, &#x27;alert-danger&#x27;: mensaje.tipo &#x3D;&#x3D;&#x3D; &#x27;error&#x27;}&quot;&gt;
     {{ mensaje.texto }}
   &lt;/div&gt;
 
-  &lt;section class&#x3D;&quot;row&quot;&gt;
-
-    &lt;!-- Usamos *ngFor para iterar sobre la lista de psicólogos --&gt;
+  &lt;!-- Usamos el pipe async para suscribirnos al observable psicologos$ --&gt;
+  &lt;section class&#x3D;&quot;row&quot; *ngIf&#x3D;&quot;psicologos$ | async as psicologos; else cargando&quot;&gt;
     &lt;div *ngFor&#x3D;&quot;let psicologo of psicologos&quot; class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
       &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0 text-center&quot;&gt;
         &lt;img [src]&#x3D;&quot;psicologo.imagen&quot; class&#x3D;&quot;card-img-top&quot; [alt]&#x3D;&quot;psicologo.nombre&quot;&gt;
@@ -623,9 +657,14 @@ export class PsicologiaComponent {
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    
   &lt;/section&gt;
-&lt;/main&gt;</code></pre>
+
+  &lt;ng-template #cargando&gt;
+    &lt;p class&#x3D;&quot;text-center&quot;&gt;Cargando especialistas...&lt;/p&gt;
+  &lt;/ng-template&gt;
+
+&lt;/main&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -660,7 +699,7 @@ export class PsicologiaComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><main class="container my-5">      <div class="text-center mb-5">    <h1 class="display-5 fw-bold">Psicología en Línea</h1>    <p class="lead text-muted">Cuida tu salud mental con nuestros psicólogos certificados. Ofrecemos un espacio seguro y confidencial para tu bienestar.</p>  </div>  <!-- Contenedor para mensajes de feedback -->  <div *ngIf="mensaje" class="alert mb-4" [ngClass]="{\'alert-success\': mensaje.tipo === \'exito\', \'alert-danger\': mensaje.tipo === \'error\'}">    {{ mensaje.texto }}  </div>  <section class="row">    <!-- Usamos *ngFor para iterar sobre la lista de psicólogos -->    <div *ngFor="let psicologo of psicologos" class="col-lg-4 col-md-6 mb-4">      <div class="card h-100 shadow-sm border-0 text-center">        <img [src]="psicologo.imagen" class="card-img-top" [alt]="psicologo.nombre">        <div class="card-body d-flex flex-column">          <h2 class="card-title h5 fw-bold">{{ psicologo.nombre }}</h2>          <p class="card-text text-muted">{{ psicologo.descripcion }}</p>          <button class="btn btn-primary mt-auto" (click)="agendarHora(psicologo.servicio)">Agendar Hora</button>        </div>      </div>    </div>      </section></main></div>'
+        var COMPONENT_TEMPLATE = '<div><main class="container my-5">      <div class="text-center mb-5">    <h1 class="display-5 fw-bold">Psicología en Línea</h1>    <p class="lead text-muted">Cuida tu salud mental con nuestros psicólogos certificados. Ofrecemos un espacio seguro y confidencial para tu bienestar.</p>  </div>  <div *ngIf="mensaje" class="alert mb-4" [ngClass]="{\'alert-success\': mensaje.tipo === \'exito\', \'alert-danger\': mensaje.tipo === \'error\'}">    {{ mensaje.texto }}  </div>  <!-- Usamos el pipe async para suscribirnos al observable psicologos$ -->  <section class="row" *ngIf="psicologos$ | async as psicologos; else cargando">    <div *ngFor="let psicologo of psicologos" class="col-lg-4 col-md-6 mb-4">      <div class="card h-100 shadow-sm border-0 text-center">        <img [src]="psicologo.imagen" class="card-img-top" [alt]="psicologo.nombre">        <div class="card-body d-flex flex-column">          <h2 class="card-title h5 fw-bold">{{ psicologo.nombre }}</h2>          <p class="card-text text-muted">{{ psicologo.descripcion }}</p>          <button class="btn btn-primary mt-auto" (click)="agendarHora(psicologo.servicio)">Agendar Hora</button>        </div>      </div>    </div>  </section>  <ng-template #cargando>    <p class="text-center">Cargando especialistas...</p>  </ng-template></main></div>'
     var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'AuthLayoutComponent', 'selector': 'app-auth-layout'},{'name': 'CartComponent', 'selector': 'app-cart'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MedicinaGeneralComponent', 'selector': 'app-medicina-general'},{'name': 'MedicinaIntegrativaComponent', 'selector': 'app-medicina-integrativa'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'PsicologiaComponent', 'selector': 'app-psicologia'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserComponent', 'selector': 'app-user'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PsicologiaComponent'};

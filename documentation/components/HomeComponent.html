@@ -106,6 +106,10 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -153,8 +157,23 @@ Es la primera página que ven los visitantes.</p>
                 <td class="col-md-9"><code>app-home</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                </td>
+            </tr>
 
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./home.component.scss</code></td>
+            </tr>
 
 
 
@@ -165,10 +184,6 @@ Es la primera página que ven los visitantes.</p>
 
 
 
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./home.component.scss</code></td>
-            </tr>
 
 
 
@@ -191,6 +206,8 @@ Es la primera página que ven los visitantes.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;; // 1. Importar RouterModule
 
 /**
  * @description
@@ -199,10 +216,15 @@ Es la primera página que ven los visitantes.</p>
  */
 @Component({
   selector: &#x27;app-home&#x27;,
-  standalone: false,
+  standalone: true, 
+  imports: [
+    CommonModule,
+    RouterModule 
+  ],
   templateUrl: &#x27;./home.component.html&#x27;,
-  styleUrl: &#x27;./home.component.scss&#x27;
+  styleUrls: [&#x27;./home.component.scss&#x27;]
 })
+
 export class HomeComponent {
 
 }
@@ -210,66 +232,71 @@ export class HomeComponent {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">
-  &lt;main&gt;
-    &lt;section class&#x3D;&quot;container py-5&quot;&gt;
-      &lt;div class&#x3D;&quot;row align-items-center&quot;&gt;
-        &lt;div class&#x3D;&quot;col-md-6 text-center text-md-start mb-4 mb-md-0&quot;&gt;
-          &lt;h1 class&#x3D;&quot;display-4 fw-bold mb-3&quot;&gt;Atención Médica de Calidad, Sin Salir de Casa&lt;/h1&gt;
-          &lt;p class&#x3D;&quot;lead text-muted mb-4&quot;&gt;Conecta con especialistas de confianza a través de nuestra plataforma segura y fácil de usar. Tu salud es nuestra prioridad.&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
-            &lt;img src&#x3D;&quot;https://images.pexels.com/photos/4021779/pexels-photo-4021779.jpeg?auto&#x3D;compress&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1260&amp;h&#x3D;750&amp;dpr&#x3D;1&quot; class&#x3D;&quot;img-fluid rounded-3 shadow&quot; alt&#x3D;&quot;Doctora en una videollamada de telemedicina&quot;&gt;
-        &lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;main&gt;
+  &lt;section class&#x3D;&quot;container py-5&quot;&gt;
+    &lt;div class&#x3D;&quot;row align-items-center&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-6 text-center text-md-start mb-4 mb-md-0&quot;&gt;
+        &lt;h1 class&#x3D;&quot;display-4 fw-bold mb-3&quot;&gt;Atención Médica de Calidad, Sin Salir de Casa&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;lead text-muted mb-4&quot;&gt;Conecta con especialistas de confianza a través de nuestra plataforma segura y fácil de usar. Tu salud es nuestra prioridad.&lt;/p&gt;
       &lt;/div&gt;
-    &lt;/section&gt;
+      &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+          &lt;img src&#x3D;&quot;https://images.pexels.com/photos/4021779/pexels-photo-4021779.jpeg?auto&#x3D;compress&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1260&amp;h&#x3D;750&amp;dpr&#x3D;1&quot; class&#x3D;&quot;img-fluid rounded-3 shadow&quot; alt&#x3D;&quot;Doctora en una videollamada de telemedicina&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
 
-    &lt;section class&#x3D;&quot;bg-light py-5&quot;&gt;
-      &lt;div class&#x3D;&quot;container&quot;&gt;
-        &lt;div class&#x3D;&quot;text-center mb-5&quot;&gt;
-          &lt;h2 class&#x3D;&quot;fw-bold&quot;&gt;Nuestros Servicios Principales&lt;/h2&gt;
-          &lt;p class&#x3D;&quot;lead text-muted&quot;&gt;Accede a la atención que necesitas, cuando la necesitas.&lt;/p&gt;
+  &lt;section class&#x3D;&quot;bg-light py-5&quot;&gt;
+    &lt;div class&#x3D;&quot;container&quot;&gt;
+      &lt;div class&#x3D;&quot;text-center mb-5&quot;&gt;
+        &lt;h2 class&#x3D;&quot;fw-bold&quot;&gt;Nuestros Servicios Principales&lt;/h2&gt;
+        &lt;p class&#x3D;&quot;lead text-muted&quot;&gt;Accede a la atención que necesitas, cuando la necesitas.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;row text-center&quot;&gt;
+
+        &lt;div class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
+          &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0&quot;&gt;
+            &lt;div class&#x3D;&quot;card-body p-4 d-flex flex-column&quot;&gt;
+              &lt;img src&#x3D;&quot;https://placehold.co/80x80/0d6efd/white?text&#x3D;MG&quot; class&#x3D;&quot;rounded-circle mb-3 mx-auto&quot; alt&#x3D;&quot;Icono Medicina General&quot;&gt;
+              &lt;h3 class&#x3D;&quot;h5 fw-bold mt-2&quot;&gt;Medicina General&lt;/h3&gt;
+              &lt;p class&#x3D;&quot;text-muted&quot;&gt;Consultas para diagnósticos, tratamientos y seguimiento de condiciones médicas generales.&lt;/p&gt;
+              &lt;a routerLink&#x3D;&quot;/medicina-general&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Agendar una Cita&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class&#x3D;&quot;row text-center&quot;&gt;
 
-          &lt;div class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
-            &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0&quot;&gt;
-              &lt;div class&#x3D;&quot;card-body p-4 d-flex flex-column&quot;&gt;
-                &lt;img src&#x3D;&quot;https://placehold.co/80x80/0d6efd/white?text&#x3D;MG&quot; class&#x3D;&quot;rounded-circle mb-3 mx-auto&quot; alt&#x3D;&quot;Icono Medicina General&quot;&gt;
-                &lt;h3 class&#x3D;&quot;h5 fw-bold mt-2&quot;&gt;Medicina General&lt;/h3&gt;
-                &lt;p class&#x3D;&quot;text-muted&quot;&gt;Consultas para diagnósticos, tratamientos y seguimiento de condiciones médicas generales.&lt;/p&gt;
-                &lt;a routerLink&#x3D;&quot;/medicina-general&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Agendar una Cita&lt;/a&gt;
-              &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
+          &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0&quot;&gt;
+            &lt;div class&#x3D;&quot;card-body p-4 d-flex flex-column&quot;&gt;
+                &lt;img src&#x3D;&quot;https://placehold.co/80x80/198754/white?text&#x3D;PSI&quot; class&#x3D;&quot;rounded-circle mb-3 mx-auto&quot; alt&#x3D;&quot;Icono Psicología&quot;&gt;
+              &lt;h3 class&#x3D;&quot;h5 fw-bold mt-2&quot;&gt;Psicología en Línea&lt;/h3&gt;
+              &lt;p class&#x3D;&quot;text-muted&quot;&gt;Apoyo emocional y terapia con psicólogos certificados en un entorno seguro y confidencial.&lt;/p&gt;
+              &lt;a routerLink&#x3D;&quot;/psicologia&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Agendar una Cita&lt;/a&gt;
             &lt;/div&gt;
           &lt;/div&gt;
+        &lt;/div&gt;
 
-          &lt;div class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
-            &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0&quot;&gt;
-              &lt;div class&#x3D;&quot;card-body p-4 d-flex flex-column&quot;&gt;
-                  &lt;img src&#x3D;&quot;https://placehold.co/80x80/198754/white?text&#x3D;PSI&quot; class&#x3D;&quot;rounded-circle mb-3 mx-auto&quot; alt&#x3D;&quot;Icono Psicología&quot;&gt;
-                &lt;h3 class&#x3D;&quot;h5 fw-bold mt-2&quot;&gt;Psicología en Línea&lt;/h3&gt;
-                &lt;p class&#x3D;&quot;text-muted&quot;&gt;Apoyo emocional y terapia con psicólogos certificados en un entorno seguro y confidencial.&lt;/p&gt;
-                &lt;a routerLink&#x3D;&quot;/psicologia&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Agendar una Cita&lt;/a&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
-            &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0&quot;&gt;
-              &lt;div class&#x3D;&quot;card-body p-4 d-flex flex-column&quot;&gt;
-                  &lt;img src&#x3D;&quot;https://placehold.co/80x80/ffc107/white?text&#x3D;MI&quot; class&#x3D;&quot;rounded-circle mb-3 mx-auto&quot; alt&#x3D;&quot;Icono Recetas Digitales&quot;&gt;
-                &lt;h3 class&#x3D;&quot;h5 fw-bold mt-2&quot;&gt;Medicina Integrativa&lt;/h3&gt;
-                &lt;p class&#x3D;&quot;text-muted&quot;&gt;Enfoque holístico que combina la medicina convencional con terapias alternativas.&lt;/p&gt;
-                &lt;a routerLink&#x3D;&quot;/medicina-integrativa&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Agendar una Cita&lt;/a&gt;
-              &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-lg-4 col-md-6 mb-4&quot;&gt;
+          &lt;div class&#x3D;&quot;card h-100 shadow-sm border-0&quot;&gt;
+            &lt;div class&#x3D;&quot;card-body p-4 d-flex flex-column&quot;&gt;
+                &lt;img src&#x3D;&quot;https://placehold.co/80x80/ffc107/white?text&#x3D;MI&quot; class&#x3D;&quot;rounded-circle mb-3 mx-auto&quot; alt&#x3D;&quot;Icono Recetas Digitales&quot;&gt;
+              &lt;h3 class&#x3D;&quot;h5 fw-bold mt-2&quot;&gt;Medicina Integrativa&lt;/h3&gt;
+              &lt;p class&#x3D;&quot;text-muted&quot;&gt;Enfoque holístico que combina la medicina convencional con terapias alternativas.&lt;/p&gt;
+              &lt;a routerLink&#x3D;&quot;/medicina-integrativa&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Agendar una Cita&lt;/a&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/section&gt;
-  &lt;/main&gt;</code></pre>
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./home.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -296,7 +323,7 @@ export class HomeComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>  <main>    <section class="container py-5">      <div class="row align-items-center">        <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">          <h1 class="display-4 fw-bold mb-3">Atención Médica de Calidad, Sin Salir de Casa</h1>          <p class="lead text-muted mb-4">Conecta con especialistas de confianza a través de nuestra plataforma segura y fácil de usar. Tu salud es nuestra prioridad.</p>        </div>        <div class="col-md-6">            <img src="https://images.pexels.com/photos/4021779/pexels-photo-4021779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid rounded-3 shadow" alt="Doctora en una videollamada de telemedicina">        </div>      </div>    </section>    <section class="bg-light py-5">      <div class="container">        <div class="text-center mb-5">          <h2 class="fw-bold">Nuestros Servicios Principales</h2>          <p class="lead text-muted">Accede a la atención que necesitas, cuando la necesitas.</p>        </div>        <div class="row text-center">          <div class="col-lg-4 col-md-6 mb-4">            <div class="card h-100 shadow-sm border-0">              <div class="card-body p-4 d-flex flex-column">                <img src="https://placehold.co/80x80/0d6efd/white?text=MG" class="rounded-circle mb-3 mx-auto" alt="Icono Medicina General">                <h3 class="h5 fw-bold mt-2">Medicina General</h3>                <p class="text-muted">Consultas para diagnósticos, tratamientos y seguimiento de condiciones médicas generales.</p>                <a routerLink="/medicina-general" class="btn btn-primary btn-lg">Agendar una Cita</a>              </div>            </div>          </div>          <div class="col-lg-4 col-md-6 mb-4">            <div class="card h-100 shadow-sm border-0">              <div class="card-body p-4 d-flex flex-column">                  <img src="https://placehold.co/80x80/198754/white?text=PSI" class="rounded-circle mb-3 mx-auto" alt="Icono Psicología">                <h3 class="h5 fw-bold mt-2">Psicología en Línea</h3>                <p class="text-muted">Apoyo emocional y terapia con psicólogos certificados en un entorno seguro y confidencial.</p>                <a routerLink="/psicologia" class="btn btn-primary btn-lg">Agendar una Cita</a>              </div>            </div>          </div>          <div class="col-lg-4 col-md-6 mb-4">            <div class="card h-100 shadow-sm border-0">              <div class="card-body p-4 d-flex flex-column">                  <img src="https://placehold.co/80x80/ffc107/white?text=MI" class="rounded-circle mb-3 mx-auto" alt="Icono Recetas Digitales">                <h3 class="h5 fw-bold mt-2">Medicina Integrativa</h3>                <p class="text-muted">Enfoque holístico que combina la medicina convencional con terapias alternativas.</p>                <a routerLink="/medicina-integrativa" class="btn btn-primary btn-lg">Agendar una Cita</a>              </div>            </div>          </div>        </div>      </div>    </section>  </main></div>'
+        var COMPONENT_TEMPLATE = '<div><main>  <section class="container py-5">    <div class="row align-items-center">      <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">        <h1 class="display-4 fw-bold mb-3">Atención Médica de Calidad, Sin Salir de Casa</h1>        <p class="lead text-muted mb-4">Conecta con especialistas de confianza a través de nuestra plataforma segura y fácil de usar. Tu salud es nuestra prioridad.</p>      </div>      <div class="col-md-6">          <img src="https://images.pexels.com/photos/4021779/pexels-photo-4021779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid rounded-3 shadow" alt="Doctora en una videollamada de telemedicina">      </div>    </div>  </section>  <section class="bg-light py-5">    <div class="container">      <div class="text-center mb-5">        <h2 class="fw-bold">Nuestros Servicios Principales</h2>        <p class="lead text-muted">Accede a la atención que necesitas, cuando la necesitas.</p>      </div>      <div class="row text-center">        <div class="col-lg-4 col-md-6 mb-4">          <div class="card h-100 shadow-sm border-0">            <div class="card-body p-4 d-flex flex-column">              <img src="https://placehold.co/80x80/0d6efd/white?text=MG" class="rounded-circle mb-3 mx-auto" alt="Icono Medicina General">              <h3 class="h5 fw-bold mt-2">Medicina General</h3>              <p class="text-muted">Consultas para diagnósticos, tratamientos y seguimiento de condiciones médicas generales.</p>              <a routerLink="/medicina-general" class="btn btn-primary btn-lg">Agendar una Cita</a>            </div>          </div>        </div>        <div class="col-lg-4 col-md-6 mb-4">          <div class="card h-100 shadow-sm border-0">            <div class="card-body p-4 d-flex flex-column">                <img src="https://placehold.co/80x80/198754/white?text=PSI" class="rounded-circle mb-3 mx-auto" alt="Icono Psicología">              <h3 class="h5 fw-bold mt-2">Psicología en Línea</h3>              <p class="text-muted">Apoyo emocional y terapia con psicólogos certificados en un entorno seguro y confidencial.</p>              <a routerLink="/psicologia" class="btn btn-primary btn-lg">Agendar una Cita</a>            </div>          </div>        </div>        <div class="col-lg-4 col-md-6 mb-4">          <div class="card h-100 shadow-sm border-0">            <div class="card-body p-4 d-flex flex-column">                <img src="https://placehold.co/80x80/ffc107/white?text=MI" class="rounded-circle mb-3 mx-auto" alt="Icono Recetas Digitales">              <h3 class="h5 fw-bold mt-2">Medicina Integrativa</h3>              <p class="text-muted">Enfoque holístico que combina la medicina convencional con terapias alternativas.</p>              <a routerLink="/medicina-integrativa" class="btn btn-primary btn-lg">Agendar una Cita</a>            </div>          </div>        </div>      </div>    </div>  </section></main></div>'
     var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'AuthLayoutComponent', 'selector': 'app-auth-layout'},{'name': 'CartComponent', 'selector': 'app-cart'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MedicinaGeneralComponent', 'selector': 'app-medicina-general'},{'name': 'MedicinaIntegrativaComponent', 'selector': 'app-medicina-integrativa'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'PsicologiaComponent', 'selector': 'app-psicologia'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserComponent', 'selector': 'app-user'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};

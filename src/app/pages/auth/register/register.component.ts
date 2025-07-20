@@ -32,6 +32,7 @@ export function emailExistsValidator(authService: AuthService): AsyncValidatorFn
 }
 
 /**
+ * @public
  * @description
  * Validador a nivel de formulario que comprueba si dos campos de contraseña coinciden.
  * @param control El `FormGroup` que contiene los controles de contraseña.

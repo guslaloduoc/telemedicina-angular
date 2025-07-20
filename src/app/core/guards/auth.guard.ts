@@ -1,8 +1,13 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
+/**
+ * @param route Snapshot de la ruta a la que se intenta acceder.
+ * @param state Estado del router en el momento de la navegación.
+ * @returns `true` para permitir el acceso; `false` para denegarlo (y redirigir al login).
+ */
+export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 

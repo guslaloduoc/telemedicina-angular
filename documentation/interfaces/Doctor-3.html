@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/pages/public/medicina-integrativa/medicina-integrativa.component.ts</code>
+            <code>src/app/pages/public/psicologia/psicologia.component.ts</code>
         </p>
 
 
@@ -380,22 +380,22 @@ interface Doctor {
 
 /**
  * @description
- * Componente que muestra la página de la especialidad de Medicina Integrativa.
- * Presenta una lista de especialistas obtenida desde un servicio y permite agendar horas.
+ * Componente que muestra la página de la especialidad de Psicología.
+ * Presenta una lista de psicólogos obtenida desde un servicio y permite agendar horas.
  */
 @Component({
-  selector: &#x27;app-medicina-integrativa&#x27;,
+  selector: &#x27;app-psicologia&#x27;,
   standalone: true,
   imports: [CommonModule],
-  templateUrl: &#x27;./medicina-integrativa.component.html&#x27;,
-  styleUrls: [&#x27;./medicina-integrativa.component.scss&#x27;]
+  templateUrl: &#x27;./psicologia.component.html&#x27;,
+  styleUrls: [&#x27;./psicologia.component.scss&#x27;]
 })
-export class MedicinaIntegrativaComponent implements OnInit {
+export class PsicologiaComponent implements OnInit {
   /**
    * @description
-   * Un Observable que emite la lista de especialistas para esta sección.
+   * Un Observable que emite la lista de psicólogos para esta especialidad.
    */
-  especialistas$!: Observable&lt;Doctor[]&gt;;
+  psicologos$!: Observable&lt;Doctor[]&gt;;
 
   /**
    * @description
@@ -418,11 +418,11 @@ export class MedicinaIntegrativaComponent implements OnInit {
 
   /**
    * @description
-   * Al inicializar el componente, se llama al servicio para obtener los especialistas.
+   * Al inicializar el componente, se llama al servicio para obtener los psicólogos.
    * @returns void
    */
   ngOnInit(): void {
-    this.especialistas$ &#x3D; this.especialidadesService.getDoctoresPorEspecialidad(&#x27;medicina-integrativa&#x27;);
+    this.psicologos$ &#x3D; this.especialidadesService.getDoctoresPorEspecialidad(&#x27;psicologia&#x27;);
   }
 
   /**
@@ -483,7 +483,7 @@ export class MedicinaIntegrativaComponent implements OnInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Doctor-2.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Doctor-3.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

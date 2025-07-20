@@ -258,7 +258,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/pages/auth/register/register.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/pages/auth/register/register.component.ts:76</a></div>
                             </td>
                         </tr>
 
@@ -364,8 +364,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/pages/auth/register/register.component.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/pages/auth/register/register.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -408,8 +408,8 @@ y se encarga de crear el formulario con todas sus validaciones.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/app/pages/auth/register/register.component.ts:116</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/pages/auth/register/register.component.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -417,7 +417,7 @@ y se encarga de crear el formulario con todas sus validaciones.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Método que se ejecuta al enviar el formulario de registro.
-Valida los datos y, si son correctos, llama al servicio de autenticación para registrar al usuario.</p>
+Valida los datos y se suscribe al método de registro del servicio de autenticación.</p>
 </div>
 
                         <div class="io-description">
@@ -457,7 +457,7 @@ Valida los datos y, si son correctos, llama al servicio de autenticación para r
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/pages/auth/register/register.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/pages/auth/register/register.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -494,7 +494,7 @@ Valida los datos y, si son correctos, llama al servicio de autenticación para r
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/pages/auth/register/register.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/pages/auth/register/register.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -517,33 +517,37 @@ Valida los datos y, si son correctos, llama al servicio de autenticación para r
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from &#x27;@angular/forms&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Router, RouterModule } from &#x27;@angular/router&#x27;;
-import { Observable, of } from &#x27;rxjs&#x27;;
-import { debounceTime, switchMap, first } from &#x27;rxjs/operators&#x27;;
+import { Observable, of, timer } from &#x27;rxjs&#x27;;
+import { map, switchMap, take } from &#x27;rxjs/operators&#x27;;
 import { CustomValidators } from &#x27;../../../core/validators/custom-validators&#x27;;
-import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { AuthService, User } from &#x27;../../../core/services/auth.service&#x27;;
 
 /**
  * @description
  * Validador asíncrono que verifica si un correo electrónico ya está en uso.
- * Es una función de orden superior (factory) que utiliza el &#x60;AuthService&#x60;.
  * @param authService El servicio de autenticación para consultar la existencia del email.
  * @returns Una función &#x60;AsyncValidatorFn&#x60; que Angular puede utilizar.
  */
 export function emailExistsValidator(authService: AuthService): AsyncValidatorFn {
   return (control: AbstractControl): Observable&lt;ValidationErrors | null&gt; &#x3D;&gt; {
-    return of(control.value).pipe(
-      debounceTime(500), // Espera 500ms después de que el usuario deja de teclear
-      switchMap(email &#x3D;&gt; 
-        authService.checkEmailExists(email) 
-          ? of({ emailExists: true }) // Si existe, devuelve un error
-          : of(null) // Si no existe, no hay error
-      ),
-      first() // Toma solo la primera emisión para completar el observable
+    if (!control.value) {
+      return of(null);
+    }
+    // Usamos un timer para esperar 500ms antes de hacer la consulta
+    return timer(500).pipe(
+      switchMap(() &#x3D;&gt; 
+        // Se suscribe al Observable devuelto por el servicio
+        authService.checkEmailExists(control.value).pipe(
+          map(exists &#x3D;&gt; (exists ? { emailExists: true } : null)),
+          take(1) // Se asegura de que el observable se complete
+        )
+      )
     );
   };
 }
 
 /**
+ * @public
  * @description
  * Validador a nivel de formulario que comprueba si dos campos de contraseña coinciden.
  * @param control El &#x60;FormGroup&#x60; que contiene los controles de contraseña.
@@ -625,7 +629,7 @@ export class RegisterComponent implements OnInit {
   /**
    * @description
    * Método que se ejecuta al enviar el formulario de registro.
-   * Valida los datos y, si son correctos, llama al servicio de autenticación para registrar al usuario.
+   * Valida los datos y se suscribe al método de registro del servicio de autenticación.
    * @returns void
    */
   onSubmit(): void {
@@ -634,16 +638,20 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    // Excluimos confirmarPassword del objeto a guardar
     const { confirmarPassword, ...userData } &#x3D; this.registerForm.value;
-    const exito &#x3D; this.authService.register(userData);
-
-    if (exito) {
-      this.registroExitoso &#x3D; true;
-      setTimeout(() &#x3D;&gt; {
-        this.router.navigate([&#x27;/auth/login&#x27;]);
-      }, 2000);
-    } 
+    
+    // REFACTOR: Ahora nos suscribimos al Observable que devuelve el método register.
+    this.authService.register(userData).subscribe(exito &#x3D;&gt; {
+      if (exito) {
+        this.registroExitoso &#x3D; true;
+        setTimeout(() &#x3D;&gt; {
+          this.router.navigate([&#x27;/auth/login&#x27;]);
+        }, 2000);
+      } else {
+        // Si el registro falla (porque el email ya existe), mostramos un error en el campo email.
+        this.registerForm.get(&#x27;email&#x27;)?.setErrors({ emailExists: true });
+      }
+    });
   }
 }
 </code></pre>

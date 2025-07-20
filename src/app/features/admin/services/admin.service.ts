@@ -22,12 +22,24 @@ export class AdminService {
     return this.usersSubject.value;
   }
 
+  /**
+   * @description
+   * SIMULACIÓN DE POST: Agrega un nuevo usuario al array en memoria.
+   * @param newUser El objeto del nuevo usuario a agregar.
+   */
+
   addUser(newUser: User): void {
     const currentUsers = this.currentUsersValue;
     const newId = Math.max(0, ...currentUsers.map(u => u.id || 0)) + 1;
     newUser.id = newId;
     this.usersSubject.next([...currentUsers, newUser]);
   }
+
+   /**
+   * @description
+   * SIMULACIÓN DE PUT: Actualiza un usuario en el array en memoria.
+   * @param updatedUser El objeto `User` con los datos actualizados.
+   */
 
   updateUser(updatedUser: User): void {
     const users = this.currentUsersValue;
@@ -38,6 +50,11 @@ export class AdminService {
     }
   }
 
+    /**
+   * @description
+   * SIMULACIÓN DE DELETE: Elimina un usuario del array en memoria.
+   * @param userId El ID del usuario que se va a eliminar.
+   */
   deleteUser(userId: number): void {
     const users = this.currentUsersValue;
     const updatedUsers = users.filter(u => u.id !== userId);

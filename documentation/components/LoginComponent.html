@@ -416,7 +416,7 @@ Se utiliza para crear y configurar el formulario de login.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Método que se ejecuta cuando el usuario envía el formulario.
-Valida los datos y llama al servicio de autenticación.</p>
+Valida los datos y se suscribe al método de login del servicio de autenticación.</p>
 </div>
 
                         <div class="io-description">
@@ -621,28 +621,36 @@ export class LoginComponent implements OnInit {
   /**
    * @description
    * Método que se ejecuta cuando el usuario envía el formulario.
-   * Valida los datos y llama al servicio de autenticación.
+   * Valida los datos y se suscribe al método de login del servicio de autenticación.
    * @returns void
    */
   onSubmit(): void {
+    // --- PASO DE DEPURACIÓN ---
+    // Añadimos este console.log para verificar si el método se está ejecutando.
+    console.log(&#x27;Botón &quot;Ingresar&quot; presionado, ejecutando onSubmit()...&#x27;);
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    const exito &#x3D; this.authService.login(this.f[&#x27;email&#x27;].value, this.f[&#x27;password&#x27;].value);
-
-    if (!exito) {
-      this.loginInvalido &#x3D; true;
-    }
+    // REFACTOR: Nos suscribimos al Observable que devuelve el método login.
+    this.authService.login(this.f[&#x27;email&#x27;].value, this.f[&#x27;password&#x27;].value)
+      .subscribe(sesion &#x3D;&gt; {
+        if (!sesion) {
+          // Si el observable emite null, significa que el login falló.
+          console.error(&#x27;Login fallido: credenciales incorrectas.&#x27;);
+          this.loginInvalido &#x3D; true;
+        }
+        // Si el login es exitoso, el AuthService ya se encarga de la redirección.
+      });
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;!-- FIX: Restauramos la estructura de layout original para centrar el contenido --&gt;
-&lt;div class&#x3D;&quot;d-flex align-items-center justify-content-center vh-100&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;d-flex align-items-center justify-content-center vh-100&quot;&gt;
   &lt;main class&#x3D;&quot;card shadow-lg&quot; style&#x3D;&quot;width: 100%; max-width: 450px; border-radius: 1rem; border: none;&quot;&gt;
     &lt;div class&#x3D;&quot;card-body p-4 p-md-5&quot;&gt;
 
@@ -655,41 +663,25 @@ export class LoginComponent implements OnInit {
         Correo o contraseña incorrectos.
       &lt;/div&gt;
 
+      &lt;!-- FIX: Se añaden [formGroup] y (ngSubmit) para conectar el formulario a Angular --&gt;
       &lt;form [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; novalidate&gt;
 
         &lt;div class&#x3D;&quot;form-floating mb-3&quot;&gt;
-          &lt;input 
-            type&#x3D;&quot;email&quot; 
-            class&#x3D;&quot;form-control&quot; 
-            id&#x3D;&quot;email&quot; 
-            placeholder&#x3D;&quot;nombre@ejemplo.com&quot; 
-            formControlName&#x3D;&quot;email&quot;
-            [ngClass]&#x3D;&quot;{ &#x27;is-invalid&#x27;: f[&#x27;email&#x27;].touched &amp;&amp; f[&#x27;email&#x27;].invalid }&quot;&gt;
+          &lt;!-- FIX: Se añade formControlName --&gt;
+          &lt;input type&#x3D;&quot;email&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;email&quot; placeholder&#x3D;&quot;nombre@ejemplo.com&quot; formControlName&#x3D;&quot;email&quot; required&gt;
           &lt;label for&#x3D;&quot;email&quot;&gt;Correo electrónico&lt;/label&gt;
-          
-          &lt;div *ngIf&#x3D;&quot;f[&#x27;email&#x27;].touched &amp;&amp; f[&#x27;email&#x27;].errors&quot; class&#x3D;&quot;invalid-feedback&quot;&gt;
-            &lt;div *ngIf&#x3D;&quot;f[&#x27;email&#x27;].errors[&#x27;required&#x27;]&quot;&gt;Correo requerido.&lt;/div&gt;
-            &lt;div *ngIf&#x3D;&quot;f[&#x27;email&#x27;].errors[&#x27;email&#x27;]&quot;&gt;El formato del correo es inválido.&lt;/div&gt;
-          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Correo requerido.&lt;/div&gt;
         &lt;/div&gt;
 
         &lt;div class&#x3D;&quot;form-floating mb-4&quot;&gt;
-          &lt;input 
-            type&#x3D;&quot;password&quot; 
-            class&#x3D;&quot;form-control&quot; 
-            id&#x3D;&quot;password&quot; 
-            placeholder&#x3D;&quot;Contraseña&quot; 
-            formControlName&#x3D;&quot;password&quot;
-            [ngClass]&#x3D;&quot;{ &#x27;is-invalid&#x27;: f[&#x27;password&#x27;].touched &amp;&amp; f[&#x27;password&#x27;].invalid }&quot;&gt;
+          &lt;!-- FIX: Se añade formControlName --&gt;
+          &lt;input type&#x3D;&quot;password&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Contraseña&quot; formControlName&#x3D;&quot;password&quot; required&gt;
           &lt;label for&#x3D;&quot;password&quot;&gt;Contraseña&lt;/label&gt;
-
-          &lt;div *ngIf&#x3D;&quot;f[&#x27;password&#x27;].touched &amp;&amp; f[&#x27;password&#x27;].errors&quot; class&#x3D;&quot;invalid-feedback&quot;&gt;
-            &lt;div *ngIf&#x3D;&quot;f[&#x27;password&#x27;].errors[&#x27;required&#x27;]&quot;&gt;Contraseña requerida.&lt;/div&gt;
-          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Contraseña requerida.&lt;/div&gt;
         &lt;/div&gt;
 
         &lt;div class&#x3D;&quot;d-grid mb-3&quot;&gt;
-          &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot; [disabled]&#x3D;&quot;loginForm.invalid&quot;&gt;Ingresar&lt;/button&gt;
+          &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary btn-lg&quot;&gt;Ingresar&lt;/button&gt;
         &lt;/div&gt;
 
         &lt;hr class&#x3D;&quot;my-4&quot;&gt;
@@ -740,7 +732,7 @@ export class LoginComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- FIX: Restauramos la estructura de layout original para centrar el contenido --><div class="d-flex align-items-center justify-content-center vh-100">  <main class="card shadow-lg" style="width: 100%; max-width: 450px; border-radius: 1rem; border: none;">    <div class="card-body p-4 p-md-5">      <div class="text-center mb-4">        <h2 class="card-title fw-bold">Login</h2>        <p class="text-muted">Iniciar sesión</p>      </div>      <div *ngIf="loginInvalido" class="alert alert-danger">        Correo o contraseña incorrectos.      </div>      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>        <div class="form-floating mb-3">          <input             type="email"             class="form-control"             id="email"             placeholder="nombre@ejemplo.com"             formControlName="email"            [ngClass]="{ \'is-invalid\': f[\'email\'].touched && f[\'email\'].invalid }">          <label for="email">Correo electrónico</label>                    <div *ngIf="f[\'email\'].touched && f[\'email\'].errors" class="invalid-feedback">            <div *ngIf="f[\'email\'].errors[\'required\']">Correo requerido.</div>            <div *ngIf="f[\'email\'].errors[\'email\']">El formato del correo es inválido.</div>          </div>        </div>        <div class="form-floating mb-4">          <input             type="password"             class="form-control"             id="password"             placeholder="Contraseña"             formControlName="password"            [ngClass]="{ \'is-invalid\': f[\'password\'].touched && f[\'password\'].invalid }">          <label for="password">Contraseña</label>          <div *ngIf="f[\'password\'].touched && f[\'password\'].errors" class="invalid-feedback">            <div *ngIf="f[\'password\'].errors[\'required\']">Contraseña requerida.</div>          </div>        </div>        <div class="d-grid mb-3">          <button type="submit" class="btn btn-primary btn-lg" [disabled]="loginForm.invalid">Ingresar</button>        </div>        <hr class="my-4">        <div class="text-center">          <p class="mb-2">            ¿No tienes una cuenta? <a routerLink="/auth/registro" class="fw-medium">Registrarse</a>          </p>          <a routerLink="/auth/recuperar" class="small">¿Olvidaste tu contraseña?</a>        </div>      </form>    </div>  </main></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="d-flex align-items-center justify-content-center vh-100">  <main class="card shadow-lg" style="width: 100%; max-width: 450px; border-radius: 1rem; border: none;">    <div class="card-body p-4 p-md-5">      <div class="text-center mb-4">        <h2 class="card-title fw-bold">Login</h2>        <p class="text-muted">Iniciar sesión</p>      </div>      <div *ngIf="loginInvalido" class="alert alert-danger">        Correo o contraseña incorrectos.      </div>      <!-- FIX: Se añaden [formGroup] y (ngSubmit) para conectar el formulario a Angular -->      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>        <div class="form-floating mb-3">          <!-- FIX: Se añade formControlName -->          <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" formControlName="email" required>          <label for="email">Correo electrónico</label>          <div class="invalid-feedback">Correo requerido.</div>        </div>        <div class="form-floating mb-4">          <!-- FIX: Se añade formControlName -->          <input type="password" class="form-control" id="password" placeholder="Contraseña" formControlName="password" required>          <label for="password">Contraseña</label>          <div class="invalid-feedback">Contraseña requerida.</div>        </div>        <div class="d-grid mb-3">          <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>        </div>        <hr class="my-4">        <div class="text-center">          <p class="mb-2">            ¿No tienes una cuenta? <a routerLink="/auth/registro" class="fw-medium">Registrarse</a>          </p>          <a routerLink="/auth/recuperar" class="small">¿Olvidaste tu contraseña?</a>        </div>      </form>    </div>  </main></div></div>'
     var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'AuthLayoutComponent', 'selector': 'app-auth-layout'},{'name': 'CartComponent', 'selector': 'app-cart'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MedicinaGeneralComponent', 'selector': 'app-medicina-general'},{'name': 'MedicinaIntegrativaComponent', 'selector': 'app-medicina-integrativa'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'PsicologiaComponent', 'selector': 'app-psicologia'},{'name': 'PublicLayoutComponent', 'selector': 'app-public-layout'},{'name': 'RecoverPasswordComponent', 'selector': 'app-recover-password'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserComponent', 'selector': 'app-user'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};

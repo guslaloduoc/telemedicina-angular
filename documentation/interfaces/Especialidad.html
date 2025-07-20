@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  Doctor</li>
+  Especialidad</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/pages/public/medicina-integrativa/medicina-integrativa.component.ts</code>
+            <code>src/app/core/services/especialidades.service.ts</code>
         </p>
 
 
@@ -130,7 +130,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interfaz local que define la estructura de los datos de un doctor o especialista.</p>
+                <p>Interfaz que define la estructura de una especialidad, incluyendo sus doctores.</p>
 
             </p>
 
@@ -154,27 +154,21 @@
                                         </a>
                                 </li>
                                 <li>
+                                        <a href="#doctores" 
+>
+                                            doctores
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#id" 
 >
                                             id
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#imagen" 
->
-                                            imagen
-                                        </a>
-                                </li>
-                                <li>
                                         <a href="#nombre" 
 >
                                             nombre
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#servicio" 
->
-                                            servicio
                                         </a>
                                 </li>
                             </ul>
@@ -225,9 +219,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="id"></a>
-                                        <span class="name "><b>id</b>
-                                            <a href="#id">
+                                        <a name="doctores"></a>
+                                        <span class="name "><b>doctores</b>
+                                            <a href="#doctores">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -235,7 +229,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>doctores:     <code>Doctor[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -243,7 +237,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>    <code>Doctor[]</code>
 
                                         </td>
                                     </tr>
@@ -258,9 +252,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="imagen"></a>
-                                        <span class="name "><b>imagen</b>
-                                            <a href="#imagen">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -268,7 +262,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>imagen:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -320,54 +314,20 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="servicio"></a>
-                                        <span class="name "><b>servicio</b>
-                                            <a href="#servicio">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>servicio:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
             </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
-import { CartService } from &#x27;../../../core/services/cart.service&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
-import { EspecialidadesService } from &#x27;../../../core/services/especialidades.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { map, catchError } from &#x27;rxjs/operators&#x27;;
+import { environment } from &#x27;../../../environments/environment&#x27;; // 1. Importar environment
 
 /**
  * @description
- * Interfaz local que define la estructura de los datos de un doctor o especialista.
+ * Interfaz que define la estructura de los datos de un doctor o especialista.
  * @internal
  */
 interface Doctor {
@@ -380,71 +340,41 @@ interface Doctor {
 
 /**
  * @description
- * Componente que muestra la página de la especialidad de Medicina Integrativa.
- * Presenta una lista de especialistas obtenida desde un servicio y permite agendar horas.
+ * Interfaz que define la estructura de una especialidad, incluyendo sus doctores.
  */
-@Component({
-  selector: &#x27;app-medicina-integrativa&#x27;,
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: &#x27;./medicina-integrativa.component.html&#x27;,
-  styleUrls: [&#x27;./medicina-integrativa.component.scss&#x27;]
+export interface Especialidad {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  doctores: Doctor[];
+}
+
+/**
+ * @description
+ * Servicio para obtener los datos de las especialidades y sus doctores desde la API.
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
 })
-export class MedicinaIntegrativaComponent implements OnInit {
-  /**
-   * @description
-   * Un Observable que emite la lista de especialistas para esta sección.
-   */
-  especialistas$!: Observable&lt;Doctor[]&gt;;
+export class EspecialidadesService {
+   private apiUrl &#x3D; &#x60;${environment.apiUrl}/especialidades&#x60;;
+
+  constructor(private http: HttpClient) { }
 
   /**
    * @description
-   * Almacena un mensaje de feedback para mostrar al usuario.
+   * Obtiene la lista de doctores para una especialidad específica.
+   * @param especialidadId El ID de la especialidad (ej. &#x27;medicina-general&#x27;).
+   * @returns Un &#x60;Observable&#x60; que emite un array de &#x60;Doctor&#x60;.
    */
-  mensaje: { tipo: &#x27;exito&#x27; | &#x27;error&#x27;, texto: string } | null &#x3D; null;
-
-  /**
-   * @description
-   * Constructor del componente. Inyecta los servicios necesarios.
-   * @param cartService El servicio para gestionar el carrito.
-   * @param router El servicio de enrutamiento.
-   * @param especialidadesService El servicio para obtener los datos de los doctores.
-   */
-  constructor(
-    private cartService: CartService,
-    private router: Router,
-    private especialidadesService: EspecialidadesService
-  ) {}
-
-  /**
-   * @description
-   * Al inicializar el componente, se llama al servicio para obtener los especialistas.
-   * @returns void
-   */
-  ngOnInit(): void {
-    this.especialistas$ &#x3D; this.especialidadesService.getDoctoresPorEspecialidad(&#x27;medicina-integrativa&#x27;);
-  }
-
-  /**
-   * @description
-   * Método que se ejecuta al hacer clic en el botón &quot;Agendar Hora&quot;.
-   * @param servicioNombre El nombre del servicio a agendar.
-   * @returns void
-   */
-  agendarHora(servicioNombre: string): void {
-    const resultado &#x3D; this.cartService.addItem(servicioNombre);
-
-    if (resultado.success) {
-      this.mensaje &#x3D; { tipo: &#x27;exito&#x27;, texto: resultado.message };
-    } else {
-      if (resultado.message.includes(&#x27;iniciar sesión&#x27;)) {
-        this.router.navigate([&#x27;/auth/login&#x27;]);
-        return;
-      }
-      this.mensaje &#x3D; { tipo: &#x27;error&#x27;, texto: resultado.message };
-    }
-
-    setTimeout(() &#x3D;&gt; this.mensaje &#x3D; null, 3000);
+  getDoctoresPorEspecialidad(especialidadId: string): Observable&lt;Doctor[]&gt; {
+    return this.http.get&lt;Especialidad[]&gt;(&#x60;${this.apiUrl}?id&#x3D;${especialidadId}&#x60;).pipe(
+      map(especialidades &#x3D;&gt; especialidades[0]?.doctores || []), // Devuelve los doctores de la primera especialidad encontrada, o un array vacío
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener los doctores:&#x27;, error);
+        return of([]); // Devuelve un array vacío en caso de error
+      })
+    );
   }
 }</code></pre>
     </div>
@@ -483,7 +413,7 @@ export class MedicinaIntegrativaComponent implements OnInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Doctor-2.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Especialidad.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

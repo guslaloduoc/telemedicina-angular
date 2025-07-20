@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >UserService</li>
+  <li class="breadcrumb-item" >EspecialidadesService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,10 +115,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/core/services/user.service.ts</code>
+            <code>src/app/core/services/especialidades.service.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio para obtener los datos de las especialidades y sus doctores desde la API.</p>
+
+            </p>
 
 
 
@@ -126,6 +133,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#apiUrl" >apiUrl</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -136,10 +158,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getCurrentUserProfile" >getCurrentUserProfile</a>
-                            </li>
-                            <li>
-                                <a href="#updateUserProfile" >updateUserProfile</a>
+                                <a href="#getDoctoresPorEspecialidad" >getDoctoresPorEspecialidad</a>
                             </li>
                         </ul>
                     </td>
@@ -159,12 +178,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, adminService: <a href="../injectables/AdminService.html" target="_self">AdminService</a>)</code>
+<code>constructor(http: HttpClient)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/services/user.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/services/especialidades.service.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -182,22 +201,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>http</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>adminService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/AdminService.html" target="_self" >AdminService</a></code>
+                                                                    <code>HttpClient</code>
                                                         </td>
                                                   
                                                     <td>
@@ -223,67 +230,32 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getCurrentUserProfile"></a>
+                    <a name="getDoctoresPorEspecialidad"></a>
                     <span class="name">
-                        <span ><b>getCurrentUserProfile</b></span>
-                        <a href="#getCurrentUserProfile"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getDoctoresPorEspecialidad</b></span>
+                        <a href="#getDoctoresPorEspecialidad"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getCurrentUserProfile()</code>
+<code>getDoctoresPorEspecialidad(especialidadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/core/services/especialidades.service.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | null&gt;</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateUserProfile"></a>
-                    <span class="name">
-                        <span ><b>updateUserProfile</b></span>
-                        <a href="#updateUserProfile"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>updateUserProfile(updatedProfile: <a href="../interfaces/User.html" target="_self">User</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/core/services/user.service.ts:28</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene la lista de doctores para una especialidad específica.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -294,13 +266,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>updatedProfile</td>
+                                                <td>especialidadId</td>
                                             <td>
-                                                            <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -308,19 +281,56 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El ID de la especialidad (ej. &#39;medicina-general&#39;).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;Doctor[]&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Un <code>Observable</code> que emite un array de <code>Doctor</code>.</p>
+
                             </div>
                 </td>
             </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>apiUrl</b></span>
+                        <a href="#apiUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x60;${environment.apiUrl}/especialidades&#x60;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/services/especialidades.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
         </tbody>
     </table>
 </section>
@@ -330,37 +340,63 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Observable, combineLatest } from &#x27;rxjs&#x27;;
-import { map, filter } from &#x27;rxjs/operators&#x27;;
-import { AuthService, User, UserSession } from &#x27;./auth.service&#x27;; // FIX: Importar desde AuthService
-import { AdminService } from &#x27;../../features/admin/services/admin.service&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { map, catchError } from &#x27;rxjs/operators&#x27;;
+import { environment } from &#x27;../../../environments/environment&#x27;; // 1. Importar environment
 
+/**
+ * @description
+ * Interfaz que define la estructura de los datos de un doctor o especialista.
+ * @internal
+ */
+interface Doctor {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+  servicio: string;
+}
+
+/**
+ * @description
+ * Interfaz que define la estructura de una especialidad, incluyendo sus doctores.
+ */
+export interface Especialidad {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  doctores: Doctor[];
+}
+
+/**
+ * @description
+ * Servicio para obtener los datos de las especialidades y sus doctores desde la API.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-export class UserService {
-  constructor(
-    private authService: AuthService,
-    private adminService: AdminService
-  ) { }
+export class EspecialidadesService {
+   private apiUrl &#x3D; &#x60;${environment.apiUrl}/especialidades&#x60;;
 
-  getCurrentUserProfile(): Observable&lt;User | null&gt; {
-    return combineLatest([
-      this.authService.currentUserSession$,
-      this.adminService.users$.pipe(filter(users &#x3D;&gt; users.length &gt; 0))
-    ]).pipe(
-      map(([session, users]) &#x3D;&gt; {
-        if (!session) return null;
-        return users.find(u &#x3D;&gt; u.email &#x3D;&#x3D;&#x3D; session.correo) || null;
+  constructor(private http: HttpClient) { }
+
+  /**
+   * @description
+   * Obtiene la lista de doctores para una especialidad específica.
+   * @param especialidadId El ID de la especialidad (ej. &#x27;medicina-general&#x27;).
+   * @returns Un &#x60;Observable&#x60; que emite un array de &#x60;Doctor&#x60;.
+   */
+  getDoctoresPorEspecialidad(especialidadId: string): Observable&lt;Doctor[]&gt; {
+    return this.http.get&lt;Especialidad[]&gt;(&#x60;${this.apiUrl}?id&#x3D;${especialidadId}&#x60;).pipe(
+      map(especialidades &#x3D;&gt; especialidades[0]?.doctores || []), // Devuelve los doctores de la primera especialidad encontrada, o un array vacío
+      catchError(error &#x3D;&gt; {
+        console.error(&#x27;Error al obtener los doctores:&#x27;, error);
+        return of([]); // Devuelve un array vacío en caso de error
       })
     );
   }
-
-  updateUserProfile(updatedProfile: User): void {
-    this.adminService.updateUser(updatedProfile);
-  }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>
@@ -403,7 +439,7 @@ export class UserService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'UserService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'EspecialidadesService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -119,6 +119,16 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio para centralizar y reutilizar validaciones personalizadas
+que se aplican en distintos formularios de la aplicación.</p>
+<p>Aquí puedes añadir métodos para validar patrones, rangos,
+comparaciones entre campos, etc.</p>
+
+            </p>
 
 
 
@@ -134,10 +144,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/core/services/validations.service.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/services/validations.service.ts:15</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Inicializa el servicio de validaciones.
+Por defecto no requiere configuración adicional.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -150,12 +167,39 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
+/**
+ * @public
+ * @description
+ * Servicio para centralizar y reutilizar validaciones personalizadas
+ * que se aplican en distintos formularios de la aplicación.
+ *
+ * Aquí puedes añadir métodos para validar patrones, rangos,
+ * comparaciones entre campos, etc.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class ValidationsService {
-
+  /**
+   * Inicializa el servicio de validaciones.
+   * Por defecto no requiere configuración adicional.
+   */
   constructor() { }
+
+  // Ejemplo de método de validación que podrías añadir:
+  /**
+   * @public
+   * @description
+   * Valida que un string contenga al menos una letra mayúscula,
+   * una minúscula y un dígito, con longitud mínima de 8 caracteres.
+   *
+   * @param value El valor a validar.
+   * @returns &#x60;true&#x60; si cumple el patrón, &#x60;false&#x60; en caso contrario.
+   */
+  // hasStrongPassword(value: string): boolean {
+  //   const pattern &#x3D; /^(?&#x3D;.*[a-z])(?&#x3D;.*[A-Z])(?&#x3D;.*\d).{8,}$/;
+  //   return pattern.test(value);
+  // }
 }
 </code></pre>
     </div>
